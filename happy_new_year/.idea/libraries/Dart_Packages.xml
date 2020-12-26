@@ -37,6 +37,13 @@
             </list>
           </value>
         </entry>
+        <entry key="auto_size_text">
+          <value>
+            <list>
+              <option value="D:/flutter/.pub-cache/hosted/pub.dartlang.org/auto_size_text-2.1.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="bloc">
           <value>
             <list>
@@ -520,6 +527,13 @@
             </list>
           </value>
         </entry>
+        <entry key="polygon_clipper">
+          <value>
+            <list>
+              <option value="D:/flutter/.pub-cache/hosted/pub.dartlang.org/polygon_clipper-1.0.2/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="pool">
           <value>
             <list>
@@ -815,6 +829,7 @@
       <root url="file://D:/flutter/.pub-cache/hosted/pub.dartlang.org/archive-2.0.13/lib" />
       <root url="file://D:/flutter/.pub-cache/hosted/pub.dartlang.org/args-1.6.0/lib" />
       <root url="file://D:/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.4.1/lib" />
+      <root url="file://D:/flutter/.pub-cache/hosted/pub.dartlang.org/auto_size_text-2.1.0/lib" />
       <root url="file://D:/flutter/.pub-cache/hosted/pub.dartlang.org/bloc-4.0.0/lib" />
       <root url="file://D:/flutter/.pub-cache/hosted/pub.dartlang.org/bloc_test-5.1.0/lib" />
       <root url="file://D:/flutter/.pub-cache/hosted/pub.dartlang.org/boolean_selector-2.0.0/lib" />
@@ -880,6 +895,7 @@
       <root url="file://D:/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-2.4.0/lib" />
       <root url="file://D:/flutter/.pub-cache/hosted/pub.dartlang.org/platform-2.2.1/lib" />
       <root url="file://D:/flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-1.0.3/lib" />
+      <root url="file://D:/flutter/.pub-cache/hosted/pub.dartlang.org/polygon_clipper-1.0.2/lib" />
       <root url="file://D:/flutter/.pub-cache/hosted/pub.dartlang.org/pool-1.4.0/lib" />
       <root url="file://D:/flutter/.pub-cache/hosted/pub.dartlang.org/process-3.0.13/lib" />
       <root url="file://D:/flutter/.pub-cache/hosted/pub.dartlang.org/provider-4.3.2+2/lib" />

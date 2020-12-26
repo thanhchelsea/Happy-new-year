@@ -43,7 +43,8 @@ dependencies:
   contact_picker: ^0.0.2
   dio: ^3.0.9
   flutter_spinkit: "^4.1.2"
-
+  auto_size_text: ^2.1.0
+  polygon_clipper: ^1.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -69,6 +70,18 @@ flutter:
   assets:
     - assets/strings/
     - assets/images/
+    - assets/image_icon/
+  fonts:
+    - family: WorkSans
+      fonts:
+        - asset: assets/fonts/worksans/WorkSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/worksans/WorkSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/worksans/WorkSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/worksans/WorkSans-Bold.ttf
+          weight: 700
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

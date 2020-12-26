@@ -19,8 +19,11 @@ class AppTheme {
   static const Color spacer = Color(0xFFF2F2F2);
   static const String fontName = 'WorkSans';
   static const Color nearlyDarkBlue = Color(0xFF2633C5);
-  static const Color nearlyDarkBrown = Color(0xFFf76d16);
-  static const Color nearlyDarkRed = Color(0xFFa1051D);
+  static const Color nearlyDarkBrown = Color(0xFF990033);
+
+
+  static const Color nearlyYellow = Color(0xFFffff66);
+  static const Color nealyRed= Color(0xffff7979);
 
   static const TextTheme textTheme = TextTheme(
     headline4: display1,
@@ -48,7 +51,7 @@ class AppTheme {
     fontWeight: FontWeight.bold,
     fontSize: 24,
     letterSpacing: 0.27,
-    color: darkerText,
+    color: nearlyDarkBrown,
   );
 
   static const TextStyle title = TextStyle(
@@ -63,10 +66,10 @@ class AppTheme {
   static const TextStyle subtitle = TextStyle(
     // subtitle2 -> subtitle
     fontFamily: fontName,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w600,
     fontSize: 14,
     letterSpacing: -0.04,
-    color: darkText,
+    color: nearlyDarkBrown,
   );
 
   static const TextStyle body2 = TextStyle(

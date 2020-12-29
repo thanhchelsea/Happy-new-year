@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
       statusBarIconBrightness: Brightness.dark,
       statusBarBrightness: Platform.isAndroid ? Brightness.dark : Brightness.light,
     ));
+    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,

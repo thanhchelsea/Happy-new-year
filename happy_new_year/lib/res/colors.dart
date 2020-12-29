@@ -19,11 +19,13 @@ class AppTheme {
   static const Color spacer = Color(0xFFF2F2F2);
   static const String fontName = 'WorkSans';
   static const Color nearlyDarkBlue = Color(0xFF2633C5);
+
+
+  // mau dung cho app
   static const Color nearlyDarkBrown = Color(0xFF990033);
-
-
-  static const Color nearlyYellow = Color(0xFFffff66);
+  static const Color nearlyYellow = Color(0xFFffdd59);
   static const Color nealyRed= Color(0xffff7979);
+  static const Color teal = Color(0xFF0be881);
 
   static const TextTheme textTheme = TextTheme(
     headline4: display1,
@@ -58,9 +60,9 @@ class AppTheme {
     // h6 -> title
     fontFamily: fontName,
     fontWeight: FontWeight.bold,
-    fontSize: 16,
+    fontSize: 18,
     letterSpacing: 0.18,
-    color: darkerText,
+    color: nearlyYellow,
   );
 
   static const TextStyle subtitle = TextStyle(

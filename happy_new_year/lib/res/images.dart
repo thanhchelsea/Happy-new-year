@@ -27,6 +27,8 @@ class AppImages {
   static const String ICON_THU_VIEN_THIEP_TET = "assets/image_icon/anhtet4.png";
   static const String ICON_THO_CUNG = "assets/image_icon/thocung.png";
   static const String ICON_LIXI = "assets/image_icon/lixi.jpg";
+  static const String ICON_LIXI2 = "assets/image_icon/lixi2.jpg";
+  static const String ICON_DIALOG_LIXI = "assets/image_icon/icondialoglixi.png";
 
   static const String LOGO_VIETNAM = "assets/images/vietnam.png";
 }

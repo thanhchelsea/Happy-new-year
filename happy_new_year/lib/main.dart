@@ -11,11 +11,14 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown
   ]).then(
-        (_) => runApp(
+    (_) => runApp(
       MultiBlocProvider(
         providers: [
           BlocProvider<HomeBloc>(
-            create: (_)=>HomeBloc(),
+            create: (_) => HomeBloc(),
+          ),
+          BlocProvider<LiXiBloc>(
+            create: (_) => LiXiBloc(),
           )
         ],
         child: MyApp.language(),

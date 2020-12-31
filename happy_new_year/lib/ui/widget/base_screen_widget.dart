@@ -1,22 +1,33 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:happy_new_year/localizations.dart';
 import 'package:happy_new_year/res/colors.dart';
 import 'package:happy_new_year/res/images.dart';
 import 'package:happy_new_year/utils/device.dart';
+
 class BaseScreen extends StatelessWidget {
   final String title;
   final bool iconMoreMenu;
   final bool iconBack;
   final Widget body;
-  bool isShowRefresh=true;
-  Function  shareImage;
-  BaseScreen({this.title, this.iconMoreMenu, this.iconBack, this.body,
-      this.isShowRefresh, this.shareImage});
+  final Widget iconMenu;
+  final Function menuMethod;
+  BaseScreen({
+    this.title,
+    this.iconMoreMenu,
+    this.iconBack,
+    this.body,
+    this.iconMenu,
+    this.menuMethod
+  });
 
   Widget getAppBarUI(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage(AppImages.APP_BAR), fit: BoxFit.fitWidth,),
+        image: DecorationImage(
+          image: AssetImage(AppImages.APP_BAR),
+          fit: BoxFit.fitWidth,
+        ),
         color: AppTheme.nearlyYellow,
         boxShadow: <BoxShadow>[
           BoxShadow(
@@ -29,7 +40,7 @@ class BaseScreen extends StatelessWidget {
       child: Container(
         child: Padding(
           padding: EdgeInsets.only(
-           // top: MediaQuery.of(context).padding.top,
+            // top: MediaQuery.of(context).padding.top,
             left: 8,
             right: 8,
           ),
@@ -44,17 +55,21 @@ class BaseScreen extends StatelessWidget {
                   color: Colors.transparent,
                   child: iconBack != null && iconBack
                       ? InkWell(
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(32.0),
-                    ),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 8),
-                      child: Icon(Icons.arrow_back,color: AppTheme.nearlyYellow,size: 30,),
-                    ),
-                  )
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(32.0),
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: Icon(
+                              Icons.arrow_back,
+                              color: AppTheme.nearlyYellow,
+                              size: 30,
+                            ),
+                          ),
+                        )
                       : Container(),
                 ),
               ),
@@ -74,18 +89,26 @@ class BaseScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    iconMoreMenu != null
+                    iconMenu != null
                         ? Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(32.0),
-                        ),
-                        onTap: () {},
-                        child: Container(
-                        ),
-                      ),
-                    )
+                            color: Colors.transparent,
+                            child: InkWell(
+                              borderRadius: const BorderRadius.all(
+                                Radius.circular(32.0),
+                              ),
+                              onTap: () {
+                                menuMethod();
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(2),
+                                decoration: BoxDecoration(
+                                  color: AppTheme.nearlyYellow,
+                                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                                ),
+                                child: iconMenu,
+                              ),
+                            ),
+                          )
                         : Container(),
                   ],
                 ),
@@ -96,6 +119,7 @@ class BaseScreen extends StatelessWidget {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,4 +137,3 @@ class BaseScreen extends StatelessWidget {
     );
   }
 }
-

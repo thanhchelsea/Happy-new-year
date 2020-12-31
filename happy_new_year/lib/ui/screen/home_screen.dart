@@ -14,18 +14,21 @@ class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
-String iamgeBacground="";
+
+String iamgeBacground = "";
+
 class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    final random = new Random();//7  9 8
-    int i=random.nextInt(11);
-    if(i!=7 && i !=8 && i!=9 && i!=10 &&i!=2){
-      iamgeBacground="assets/images/anhnen${i}.jpg";
-    }
-    else  iamgeBacground="assets/images/anhnen3.jpg";
+    final random = new Random(); //7  9 8
+    int i = random.nextInt(11);
+    if (i != 7 && i != 8 && i != 9 && i != 10 && i != 2 && i != 0) {
+      iamgeBacground = "assets/images/anhnen${i}.jpg";
+    } else
+      iamgeBacground = "assets/images/anhnen3.jpg";
   }
+
   @override
   Widget build(BuildContext context) {
     final orientation = MediaQuery.of(context).orientation;
@@ -42,16 +45,19 @@ class _HomeScreenState extends State<HomeScreen> {
               width: DeviceUtil.getDeviceWidth(context),
               alignment: Alignment.center,
             ),
-            Image(
-              image: AssetImage(AppImages.ANH_NEN12),
-              // fit: BoxFit.cover,
-              alignment: Alignment.center,
+            Container(
+              //  color: Colors.blue,
+              child: Image(
+                image: AssetImage(AppImages.ANH_NEN12),
+                fit: BoxFit.cover,
+                alignment: Alignment.topCenter,
+              ),
             ),
             Container(
               margin: EdgeInsets.only(top: 100),
               alignment: Alignment.topLeft,
               width: 300,
-              height: 0.7*DeviceUtil.getDeviceHeight(context),
+              height: 0.7 * DeviceUtil.getDeviceHeight(context),
               child: Image(
                 width: 100,
                 height: 100,
@@ -63,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               alignment: Alignment.centerRight,
               width: 300,
-              height: 0.7*DeviceUtil.getDeviceHeight(context),
+              height: 0.7 * DeviceUtil.getDeviceHeight(context),
               child: Image(
                 width: 100,
                 height: 100,
@@ -75,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Container(
               alignment: Alignment.center,
               width: 300,
-              height: 0.7*DeviceUtil.getDeviceHeight(context),
+              height: 0.7 * DeviceUtil.getDeviceHeight(context),
               child: Image(
                 width: 100,
                 height: 100,
@@ -88,7 +94,19 @@ class _HomeScreenState extends State<HomeScreen> {
               bottom: 0.07 * DeviceUtil.getDeviceHeight(context),
               child: Column(
                 children: <Widget>[
+                  // Container(
+                  //   child: Text(
+                  //     'Tân Sửu 2021...',
+                  //     style: TextStyle(
+                  //       fontSize: 40,
+                  //       color: AppTheme.nearlyDarkBrown,
+                  //     ),
+                  //   ),
+                  // ),
+                  Countdown(),
                   Container(
+                    alignment: Alignment.centerLeft,
+                    margin: EdgeInsets.only(top: 20),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -153,8 +171,20 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              ItemAppNgayTet("home.cam_nang_tet",AppImages.ANH_NEN7,(){Navigator.pushNamed(context, Routes.lixi,);}),
-                              ItemAppNgayTet("home.li_xi",AppImages.ANH_NEN8,(){Navigator.pushNamed(context, Routes.lixi,);}),
+                              ItemAppNgayTet(
+                                  "home.cam_nang_tet", AppImages.ANH_NEN7, () {
+                                Navigator.pushNamed(
+                                  context,
+                                  Routes.lixi,
+                                );
+                              }),
+                              ItemAppNgayTet("home.li_xi", AppImages.ANH_NEN8,
+                                  () {
+                                Navigator.pushNamed(
+                                  context,
+                                  Routes.lixi,
+                                );
+                              }),
                             ],
                           ),
                         ),
@@ -169,5 +199,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
 }

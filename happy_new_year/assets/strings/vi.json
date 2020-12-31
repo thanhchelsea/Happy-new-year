@@ -9,5 +9,20 @@
     "van_khan_tet": "Văn khấn tết",
     "ngay_tet": "Ngày tết",
     "li_xi": "Lì xì"
+  },
+
+  "li_xi": {
+    "phong_bao": "Phong bao",
+    "tiep_tuc": "Tiếp tục lì xì",
+    "menh_gia": "Mệnh giá:",
+    "xac_nhan": "Xác nhận",
+    "da_chon": "Mệnh giá đã chọn:",
+    "chon_menh_gia": "Chọn mệnh giá lì xì phía dưới!",
+    "error": "Không chọn quá 9 lì xì!"
+  },
+
+  "xac_nhan": {
+    "huy": "Hủy",
+    "xac_nhan": "Xác nhận"
   }
 }

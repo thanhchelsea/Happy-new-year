@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class AppTheme {
   AppTheme._();
 
-  static const Color notWhite = Color(0xFFEDF0F2);
+  static const Color notWhite = Color(0xFFecf0f1);
   static const Color nearlyWhite = Color(0xFFFEFEFE);
   static const Color white = Color(0xFFFFFFFF);
-  static const Color nearlyBlack = Color(0xFF213333);
+  static const Color nearlyBlack = Color(0xFF34495e);
   static const Color grey = Color(0xFF3A5160);
   static const Color dark_grey = Color(0xFF313A44);
 
@@ -18,7 +18,7 @@ class AppTheme {
   static const Color chipBackground = Color(0xFFEEF1F3);
   static const Color spacer = Color(0xFFF2F2F2);
   static const String fontName = 'WorkSans';
-  static const Color nearlyDarkBlue = Color(0xFF2633C5);
+  static const Color nearlyDarkBlue = Color(0xFF2980b9);
 
 
   // mau dung cho app
@@ -51,7 +51,7 @@ class AppTheme {
     // h5 -> headline
     fontFamily: fontName,
     fontWeight: FontWeight.bold,
-    fontSize: 24,
+    fontSize: 20,
     letterSpacing: 0.27,
     color: nearlyDarkBrown,
   );
@@ -89,7 +89,7 @@ class AppTheme {
     fontWeight: FontWeight.w400,
     fontSize: 16,
     letterSpacing: -0.05,
-    color: darkText,
+    color: nearlyYellow,
   );
 
   static const TextStyle caption = TextStyle(
@@ -98,6 +98,6 @@ class AppTheme {
     fontWeight: FontWeight.w400,
     fontSize: 12,
     letterSpacing: 0.2,
-    color: lightText, // was lightText
+    color: deactivatedText, // was lightText
   );
 }

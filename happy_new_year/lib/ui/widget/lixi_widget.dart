@@ -35,7 +35,7 @@ class _LixiItemState extends State<LiXiItem> {
             flipOnTouch: false,
             front: InkWell(
               onTap: (){
-                showDemoDialog(context: context);
+                showDemoDialog(context: context,state:state.tien[widget.i]);
                 BlocProvider.of<LiXiBloc>(context).add(ChonLiXi(true));
                 cardKey.currentState.toggleCard();
               },
@@ -60,23 +60,39 @@ class _LixiItemState extends State<LiXiItem> {
               ),
             ),
             back: InkWell(
-              onTap: (){cardKey.currentState.toggleCard();},
-              child: Container(
-                margin: EdgeInsets.only(left: 5, right: 5, bottom: 20),
-                color: Colors.white,
-                child: Center(child: Text(state.tien[widget.i].toString())),
+              onTap: (){
+                cardKey.currentState.toggleCard();
+              },
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(left: 5, right: 5, bottom: 20),
+                    child: Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(width: 5, color: AppTheme.nearlyYellow),
+                        ),
+                        child: Image(
+                          image: AssetImage(AppImages.ICON_LIXI2),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                ],
               ),
             ),
           );
         },
       );
     }
-  void showDemoDialog({BuildContext context}) {
+  void showDemoDialog({BuildContext context,state}) {
     showDialog<dynamic>(
       context: context,
       builder: (BuildContext context) => DialogConfirmReport(
         barrierDismissible: true,
-
+        money: state,
       ),
     );
   }

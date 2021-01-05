@@ -94,7 +94,19 @@ class _HomeScreenState extends State<HomeScreen> {
               bottom: 0.07 * DeviceUtil.getDeviceHeight(context),
               child: Column(
                 children: <Widget>[
+                  // Container(
+                  //   child: Text(
+                  //     'Tân Sửu 2021...',
+                  //     style: TextStyle(
+                  //       fontSize: 40,
+                  //       color: AppTheme.nearlyDarkBrown,
+                  //     ),
+                  //   ),
+                  // ),
+                  Countdown(),
                   Container(
+                    alignment: Alignment.centerLeft,
+                    margin: EdgeInsets.only(top: 20),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,

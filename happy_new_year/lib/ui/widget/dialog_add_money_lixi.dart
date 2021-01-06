@@ -45,7 +45,6 @@ class DialogAddMoneyState extends State<DialogAddMoney>
   ];
   List<String> moneySelect = [];
   Widget itemMoney(String money, IconData icon, state,{bool isDelete}) {
-    print(isDelete.toString());
     return  InkWell(
       onTap: () {
         if (moneySelect.length <=8) {

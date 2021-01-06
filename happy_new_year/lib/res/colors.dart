@@ -24,8 +24,10 @@ class AppTheme {
   // mau dung cho app
   static const Color nearlyDarkBrown = Color(0xFF990033);
   static const Color nearlyYellow = Color(0xFFffdd59);
-  static const Color nealyRed= Color(0xffff7979);
+  static const Color nealyRed= Color(0xffc0392b);
   static const Color teal = Color(0xFF0be881);
+  static const Color blue = Color(0xFF3498db);
+  static const Color black = Color(0xFF34495e);
 
   static const TextTheme textTheme = TextTheme(
     headline4: display1,
@@ -98,6 +100,6 @@ class AppTheme {
     fontWeight: FontWeight.w400,
     fontSize: 12,
     letterSpacing: 0.2,
-    color: deactivatedText, // was lightText
+    color: black, // was lightText
   );
 }

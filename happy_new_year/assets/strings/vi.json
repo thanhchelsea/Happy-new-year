@@ -8,7 +8,8 @@
     "chuc_tet": "Chúc tết",
     "van_khan_tet": "Văn khấn tết",
     "ngay_tet": "Ngày tết",
-    "li_xi": "Lì xì"
+    "li_xi": "Lì xì",
+    "tao_thiep": "Tạo Thiệp"
   },
 
   "li_xi": {
@@ -24,5 +25,14 @@
   "xac_nhan": {
     "huy": "Hủy",
     "xac_nhan": "Xác nhận"
+  },
+
+  "tao_thiep": {
+    "doi_phong_nen": "Đổi nền",
+    "loi_chuc": "Lời chúc",
+    "thu_vien_loi_chuc": "Thư viện lời chúc",
+    "chia_se": "Chia sẻ",
+    "font_chuc": "Kiểu chữ",
+    "luu": "Lưu thiệp"
   }
 }

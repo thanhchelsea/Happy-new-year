@@ -6,6 +6,7 @@ class Routes{
   static const String splashScreen="/splash_screen";
   static const String home = "/homeScreen";
   static const String lixi = "/li_xi";
+  static const String taothiep="./tao_thiep_screen";
 
 
   static String initScreen() => home;
@@ -14,5 +15,6 @@ class Routes{
 //    splashScreen:(context)=>SplashScreen(),
     home: (context) => HomeScreen(),//Home(),
     lixi: (context) => LiXiScreen(),//Home(),
+    taothiep:(context)=> TaoThiepScreen()
   };
 }

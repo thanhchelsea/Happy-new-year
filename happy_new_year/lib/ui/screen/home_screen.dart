@@ -127,9 +127,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             scrollDirection: Axis.horizontal,
                             children: <Widget>[
                               Container(
-                                  alignment: Alignment.center,
-                                  child: ItemApp(AppImages.ICON_THIEP_TET,
-                                      "home.tao_thiep")),
+                                alignment: Alignment.center,
+                                child: ItemApp(
+                                  AppImages.ICON_THIEP_TET,
+                                  "home.tao_thiep",
+                                  method:(){ Navigator.pushNamed(context, Routes.taothiep);},
+                                ),
+                              ),
                               Container(
                                   alignment: Alignment.center,
                                   child: ItemApp(AppImages.ICON_THIEP,

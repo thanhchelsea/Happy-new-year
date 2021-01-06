@@ -107,10 +107,18 @@ class LiXiBloc extends Bloc<LiXiEvent, LiXiState> {
       List<String> a =state.tien;
       List<String> b = getRandomElement(a);
       yield ResetLiXiState.fromOldLiXiState(state,tien: b);
+      print("danh sach");
+      for(String i in b){
+        print(i);
+      }
     }
     if (event is ConfirmListLiXi) {
       List<String> a = event.payload;
       List<String> b = getRandomElement(a);
+      print("danh sach");
+      for(String i in b){
+        print(i);
+      }
       yield AddMoneyState.fromOldLiXiState(
         state,
         isdialog: false,
@@ -124,8 +132,7 @@ class LiXiBloc extends Bloc<LiXiEvent, LiXiState> {
   }
 
   List<String> getRandomElement<T>(List<String> list) {
-    final random = new Random();
-     List<String> a = List.generate(list.length, (_) => list[random.nextInt(list.length)]);
-    return a;
+     list.shuffle();// xao tron item trong list
+    return list;
   }
 }

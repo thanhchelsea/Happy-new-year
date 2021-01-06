@@ -7,11 +7,12 @@ import 'package:polygon_clipper/polygon_border.dart';
 class ItemApp extends StatelessWidget {
   String imageIcon;
   String title;
-  ItemApp(this.imageIcon, this.title);
+  Function method;
+  ItemApp(this.imageIcon, this.title,{this.method});
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){},
+      onTap: (){method();},
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

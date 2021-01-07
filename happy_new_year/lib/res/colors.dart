@@ -18,6 +18,10 @@ class AppTheme {
   static const Color chipBackground = Color(0xFFEEF1F3);
   static const Color spacer = Color(0xFFF2F2F2);
   static const String fontName = 'WorkSans';
+  static const String fontName1 = 'WorkSans1';
+  static const String fontName2 = 'WorkSans2';
+  static const String fontName3 = 'WorkSans3';
+
   static const Color nearlyDarkBlue = Color(0xFF2980b9);
 
 
@@ -90,6 +94,14 @@ class AppTheme {
     fontFamily: fontName,
     fontWeight: FontWeight.w400,
     fontSize: 16,
+    letterSpacing: -0.05,
+    color: nearlyYellow,
+  );
+  static const TextStyle body3 = TextStyle(
+    // body2 -> body1
+    fontFamily: fontName,
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
     letterSpacing: -0.05,
     color: nearlyYellow,
   );

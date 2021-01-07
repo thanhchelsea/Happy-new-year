@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
               alignment: Alignment.center,
             ),
             Container(
-              //  color: Colors.blue,
+             //   color: Colors.blue,
               child: Image(
                 image: AssetImage(AppImages.ANH_NEN12),
                 fit: BoxFit.cover,
@@ -67,8 +67,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
-              alignment: Alignment.centerRight,
-              width: 300,
+             // color:Colors.yellow,
+              alignment: Alignment.topRight,
+              width: DeviceUtil.getDeviceWidth(context),
               height: 0.7 * DeviceUtil.getDeviceHeight(context),
               child: Image(
                 width: 100,
@@ -79,9 +80,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             Container(
+             // color:Colors.blue,
               alignment: Alignment.center,
-              width: 300,
-              height: 0.7 * DeviceUtil.getDeviceHeight(context),
+              width: DeviceUtil.getDeviceWidth(context),
+              height: 0.45* DeviceUtil.getDeviceHeight(context),
               child: Image(
                 width: 100,
                 height: 100,
@@ -94,15 +96,6 @@ class _HomeScreenState extends State<HomeScreen> {
               bottom: 0.07 * DeviceUtil.getDeviceHeight(context),
               child: Column(
                 children: <Widget>[
-                  // Container(
-                  //   child: Text(
-                  //     'Tân Sửu 2021...',
-                  //     style: TextStyle(
-                  //       fontSize: 40,
-                  //       color: AppTheme.nearlyDarkBrown,
-                  //     ),
-                  //   ),
-                  // ),
                   Countdown(),
                   Container(
                     alignment: Alignment.centerLeft,

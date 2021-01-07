@@ -32,5 +32,9 @@ class AppImages {
 
   //anh thei
   static const String THIEP1 = "assets/thieptet/thiep1.png";
-  static const String LOGO_VIETNAM = "assets/images/vietnam.png";
+  static const String THIEP2 = "assets/thieptet/thiep2.jpg";
+  static const String THIEP3 = "assets/thieptet/thiep3.jpg";
+  static const String THIEP4 = "assets/thieptet/thiep4.jpg";
+  static const String THIEP5 = "assets/thieptet/thiep5.jpg";
+  static const String THIEP6 = "assets/thieptet/thiep6.jpg";
 }

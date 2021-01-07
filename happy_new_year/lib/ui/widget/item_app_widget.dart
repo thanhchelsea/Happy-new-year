@@ -21,6 +21,13 @@ class ItemApp extends StatelessWidget {
             padding: EdgeInsets.all(8),
             margin: EdgeInsets.only(left: 8, right: 8),
             decoration: ShapeDecoration(
+              shadows: [
+                BoxShadow(
+                  offset: const Offset(3.0, 3.0),
+                  blurRadius: 3.0,
+                  spreadRadius: 1.0,
+                ),
+              ],
               color: AppTheme.nearlyYellow,
               shape: PolygonBorder(
                 sides: 6,

@@ -19,7 +19,10 @@ void main() async {
           ),
           BlocProvider<LiXiBloc>(
             create: (_) => LiXiBloc(),
-          )
+          ),
+          BlocProvider<TaoThiepBloc>(
+            create: (_) => TaoThiepBloc(),
+          ),
         ],
         child: MyApp.language(),
       ),

@@ -1,10 +1,20 @@
+import 'dart:typed_data';
+
+import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:happy_new_year/blocs/blocs.dart';
 import 'package:happy_new_year/localizations.dart';
 import 'package:happy_new_year/res/colors.dart';
 import 'package:happy_new_year/res/images.dart';
+import 'package:happy_new_year/res/resources.dart';
 import 'package:happy_new_year/ui/widget/base_screen_widget.dart';
+import 'package:happy_new_year/ui/widget/widget.dart';
+import 'package:happy_new_year/ui/widget/widget_to_image.dart';
+import 'package:happy_new_year/utils/common.dart';
 import 'package:happy_new_year/utils/device.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TaoThiepScreen extends StatefulWidget {
   @override
@@ -28,16 +38,97 @@ class BodyThiep extends StatefulWidget {
 }
 
 class _BodyThiepState extends State<BodyThiep> {
-  bool isShowSelection=false;
-  Widget item(String title, IconData icon){
+  bool isShowSelection = true;
+  bool isLoiChuc = false,
+      isDoiNen = false,
+      isDoiKieuChu = false,
+      isThuVienThiep = false;
+  List<ListItemSlect> listItem = [];
+  int currentIndex;
+
+  Uint8List bytes1;
+  GlobalKey key1;
+  _shareImages() async {
+    print("sasa");
+
+    this.bytes1 = bytes1;
+
+    try {
+      final bytes1 = await Common.capture(key1);
+      await Share.files(
+          'esys images',
+          {
+            'esys.png': bytes1.buffer.asUint8List(),
+          },
+          'image/png');
+    } catch (e) {
+      print('error: $e');
+    }
+  }
+
+  Widget item(String title, IconData icon, int index) {
     return InkWell(
-      onTap: (){
+      onTap: () {
+        if (index != currentIndex) {
+          setState(() {
+            currentIndex = index;
+            isShowSelection = true;
+          });
+        } else {
+          setState(() {
+            currentIndex = index;
+            isShowSelection = !isShowSelection;
+          });
+        }
+
         setState(() {
-          isShowSelection=!isShowSelection;
+          //  isShowSelection = !isShowSelection;
+          switch (index) {
+            case 0:
+              {
+                isLoiChuc = true;
+                isDoiNen = false;
+                isDoiKieuChu = false;
+                isThuVienThiep = false;
+                // tao dialog tai day
+                showDemoDialog(context: context);
+                break;
+              }
+            case 1:
+              {
+                isDoiNen = true;
+                isLoiChuc = false;
+                isDoiKieuChu = false;
+                isThuVienThiep = false;
+                break;
+              }
+            case 2:
+              {
+                isDoiKieuChu = true;
+                isLoiChuc = false;
+                isDoiNen = false;
+                isThuVienThiep = false;
+                break;
+              }
+            case 3:
+              {
+                isThuVienThiep = true;
+                isLoiChuc = false;
+                isDoiNen = false;
+                isDoiKieuChu = false;
+                break;
+              }
+            case 4:{
+
+              _shareImages();
+
+              break;
+            }
+          }
         });
       },
       child: Container(
-        margin: EdgeInsets.only(top:5,bottom: 5,left: 12,right: 12),
+        margin: EdgeInsets.only(top: 5, bottom: 5, left: 12, right: 12),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
@@ -49,78 +140,489 @@ class _BodyThiepState extends State<BodyThiep> {
               ),
             ),
             Container(
-              child: Text(Language.of(context).getText(title),style: AppTheme.caption,),
+              child: Text(
+                Language.of(context).getText(title),
+                style: AppTheme.caption,
+              ),
             ),
-
           ],
         ),
       ),
     );
   }
 
-  Widget ItemSelect(){
-    return Container(
-      width: DeviceUtil.getDeviceWidth(context),
-      padding: EdgeInsets.all(20),
-      //  height: 50,
-      color: Colors.white.withOpacity(0.6),
-      child: Text("fdfdfd"),
+  void showDemoDialog({BuildContext context, state}) {
+    showDialog<dynamic>(
+      context: context,
+      builder: (BuildContext context) => DialogConfirmText(
+        barrierDismissible: true,
+      ),
     );
   }
+
+  String contentText = "Chúc mừng năm mới 2021";
+  TextStyle fontText = GoogleFonts.rye(
+    fontSize: 14,
+    color: AppTheme.black,
+  );
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppTheme.nealyRed,
-      width: DeviceUtil.getDeviceWidth(context),
-      height: DeviceUtil.getDeviceHeight(context)-70,
-      child: Container(
-        child: Stack(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(top: 20,bottom: 20),
-              alignment: Alignment.center,
-              // color: Colors.redAccent,
-              // width: DeviceUtil.getDeviceWidth(context),
-              height: (7/8) * DeviceUtil.getDeviceHeight(context)-70,
-              //margin: EdgeInsets.all(20),
-              child: Image(
-                image: AssetImage(AppImages.THIEP1),
-              ),
+    listItem.add(new ListItemSlect("tao_thiep.loi_chuc", Icons.title));
+    listItem
+        .add(new ListItemSlect("tao_thiep.doi_phong_nen", Icons.aspect_ratio));
+    listItem.add(new ListItemSlect("tao_thiep.font_chuc", Icons.format_italic));
+    listItem.add(
+        new ListItemSlect("tao_thiep.thu_vien_loi_chuc", Icons.receipt)); //
+    listItem.add(new ListItemSlect("tao_thiep.chia_se", Icons.share));
+    listItem.add(new ListItemSlect("tao_thiep.luu", Icons.save_alt));
+    return BlocConsumer<TaoThiepBloc, TaoThiepState>(
+      listener: (context, state) {
+        // pinyonScript , lato ,share ,zeyada,yesevaOne,rye
+        switch (state.font) {
+          case "1":
+            {
+              setState(() {
+                fontText = GoogleFonts.pinyonScript(
+                  fontSize: double.parse((state.size.toString())),
+                  color: state.color,
+                );
+              });
+              break;
+            }
+          case "2":
+            {
+              setState(() {
+                fontText = GoogleFonts.lato(
+                  fontSize: double.parse((state.size.toString())),
+                  color: state.color,
+                );
+              });
+              break;
+            }
+          case "3":
+            {
+              setState(() {
+                fontText = GoogleFonts.share(
+                  fontSize: double.parse((state.size.toString())),
+                  color: state.color,
+                );
+              });
+              break;
+            }
+          case "4":
+            {
+              setState(() {
+                fontText = GoogleFonts.tangerine(
+                  fontSize: double.parse((state.size.toString())),
+                  color: state.color,
+                );
+              });
+              break;
+            }
+          case "5":
+            {
+              setState(() {
+                fontText = GoogleFonts.yesevaOne(
+                  fontSize: double.parse((state.size.toString())),
+                  color: state.color,
+                );
+              });
+              break;
+            }
+          case "0":
+            {
+              setState(() {
+                fontText = GoogleFonts.rye(
+                  fontSize: double.parse((state.size.toString())),
+                  color: state.color,
+                );
+              });
+
+              break;
+            }
+        }
+      },
+      builder: (context, state) {
+        return Container(
+          color: AppTheme.nealyRed,
+          width: DeviceUtil.getDeviceWidth(context),
+          height: DeviceUtil.getDeviceHeight(context) - 70,
+          child: Container(
+            child: Stack(
+              children: <Widget>[
+                Container(
+                    padding: EdgeInsets.only(top: 20, bottom: 20),
+                    alignment: Alignment.center,
+                    // width: DeviceUtil.getDeviceWidth(context),
+                    //   height: (7 / 8) * DeviceUtil.getDeviceHeight(context) - 70,
+                    //margin: EdgeInsets.all(20),
+                    child:WidgetToImage(
+                      builder: (key) {
+                        this.key1 = key;
+                        return  Stack(
+                          alignment: Alignment.center,
+                          children: <Widget>[
+                            Image(
+                              image: AssetImage(state.image),
+                            ),
+                            Container(
+                              width: 300,
+                              child: Text(
+                                state.loiChuc,
+                                textAlign: TextAlign.center,
+                                style: fontText,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        isShowSelection
+                            ? ItemSelect(
+                                isLoiChuc: isLoiChuc,
+                                isDoiKieuChu: isDoiKieuChu,
+                                isDoiNen: isDoiNen,
+                                isThuVienThiep: isThuVienThiep,
+                              )
+                            : Container(),
+                        Container(
+                          alignment: Alignment.center,
+                          color: AppTheme.white,
+                          width: DeviceUtil.getDeviceWidth(context),
+                          height: (1 / 9) * DeviceUtil.getDeviceHeight(context),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: List.generate(
+                                5,
+                                (index) => item(listItem[index].title,
+                                    listItem[index].icon, index),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
             ),
-            Positioned(
-              bottom: 0,
-              child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                     isShowSelection ? ItemSelect():Container(),
-                      Container(
-                        alignment: Alignment.center,
-                        color: AppTheme.white,
-                        width: DeviceUtil.getDeviceWidth(context),
-                        height:(1/8)* DeviceUtil.getDeviceHeight(context),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              item("tao_thiep.loi_chuc", Icons.title),
-                              item("tao_thiep.doi_phong_nen", Icons.aspect_ratio),
-                              item("tao_thiep.font_chuc", Icons.format_italic),
-                              item("tao_thiep.thu_vien_loi_chuc", Icons.receipt),
-                              item("tao_thiep.chia_se", Icons.share),
-                              item("tao_thiep.luu", Icons.save_alt),
-                            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class ListItemSlect {
+  String title;
+  IconData icon;
+
+  ListItemSlect(this.title, this.icon);
+}
+
+class ItemSelect extends StatefulWidget {
+  bool isLoiChuc, isDoiNen, isDoiKieuChu, isThuVienThiep;
+  ItemSelect({
+    this.isLoiChuc,
+    this.isDoiNen,
+    this.isDoiKieuChu,
+    this.isThuVienThiep,
+  });
+
+  @override
+  _ItemSelectState createState() => _ItemSelectState();
+}
+
+class _ItemSelectState extends State<ItemSelect> {
+  List<String> listImage = [];
+  List<Color> listColor = [];
+  // List<String> fontText = [];
+  List<TextStyle> fontText = [];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    listImage.add(AppImages.THIEP6);
+    listImage.add(AppImages.THIEP1);
+    listImage.add(AppImages.THIEP2);
+    listImage.add(AppImages.THIEP3);
+    listImage.add(AppImages.THIEP4);
+    listImage.add(AppImages.THIEP5);
+    listImage.add(AppImages.ANH_NEN2);
+    listImage.add(AppImages.ANH_NEN4);
+
+    listColor.add(Color(0xfffdcb6e));
+    listColor.add(Color(0xff2d3436));
+    listColor.add(Color(0xffd63031));
+    listColor.add(Color(0xff9b59b6));
+    listColor.add(Color(0xffffffff));
+    listColor.add(Color(0xff16a085));
+    listColor.add(Color(0xff74b9ff));
+    listColor.add(Color(0xfffd79a8));
+    listColor.add(Color(0xff00b894));
+
+    fontText.add(
+      GoogleFonts.rye(
+        //pinyonScript , lato ,share ,zeyada,yesevaOne,rye
+        fontSize: 14,
+        color: AppTheme.black,
+      ),
+    );
+    fontText.add(
+      GoogleFonts.pinyonScript(
+        //pinyonScript , lato ,share ,zeyada,yesevaOne,rye
+        fontSize: 14,
+        color: AppTheme.black,
+      ),
+    );
+    fontText.add(
+      GoogleFonts.lato(
+        //pinyonScript , lato ,share ,zeyada,yesevaOne,rye
+        fontSize: 14,
+        color: AppTheme.black,
+      ),
+    );
+    fontText.add(
+      GoogleFonts.share(
+        //pinyonScript , lato ,share ,zeyada,yesevaOne,rye
+        fontSize: 14,
+        color: AppTheme.black,
+      ),
+    );
+    fontText.add(
+      GoogleFonts.tangerine(
+        //pinyonScript , lato ,share ,zeyada,yesevaOne,rye
+        fontSize: 14,
+        color: AppTheme.black,
+      ),
+    );
+    fontText.add(
+      GoogleFonts.yesevaOne(
+        //pinyonScript , lato ,share ,zeyada,yesevaOne,rye
+        fontSize: 14,
+        color: AppTheme.black,
+      ),
+    );
+  }
+
+  int valueHolder = 20;
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<TaoThiepBloc, TaoThiepState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        return Container(
+          padding: widget.isLoiChuc == null &&
+                  widget.isDoiNen == null &&
+                  widget.isDoiKieuChu == null &&
+                  widget.isThuVienThiep == null
+              ? EdgeInsets.all(0)
+              : EdgeInsets.all(10),
+          width: DeviceUtil.getDeviceWidth(context),
+          decoration: BoxDecoration(color: AppTheme.white),
+          child: Stack(
+            children: <Widget>[
+              widget.isThuVienThiep && widget.isThuVienThiep == true
+                  ? Container(
+                      width: DeviceUtil.getDeviceWidth(context),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: List.generate(
+                            listImage.length,
+                            (index) => InkWell(
+                              onTap: () {
+                                BlocProvider.of<TaoThiepBloc>(context)
+                                    .add(ChoseImage(listImage[index]));
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(left: 10, right: 10),
+                                color: Colors.blue,
+                                child: Image(
+                                  //   width: DeviceUtil.getDeviceWidth(context) / 5,
+                                  height: 50,
+                                  image: AssetImage(listImage[index]),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ],
-                  )
-              ),
-            )
-          ],
-        ),
-      ),
+                    )
+                  : Container(),
+              widget.isDoiNen && widget.isDoiNen == true
+                  ? Container(
+                      width: DeviceUtil.getDeviceWidth(context),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: List.generate(
+                            listImage.length,
+                            (index) => InkWell(
+                              onTap: () {
+                                BlocProvider.of<TaoThiepBloc>(context)
+                                    .add(ChoseImage(listImage[index]));
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(left: 10, right: 10),
+                                color: Colors.blue,
+                                child: Image(
+                                  //   width: DeviceUtil.getDeviceWidth(context) / 5,
+                                  height: 50,
+                                  image: AssetImage(listImage[index]),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  : Container(),
+              widget.isDoiKieuChu && widget.isDoiKieuChu == true
+                  ? Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.only(bottom: 5),
+                            child: Text(
+                              Language.of(context).getText("tao_thiep.mau_chu"),
+                              style: AppTheme.caption,
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(bottom: 15),
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: List.generate(
+                                    listColor.length,
+                                    (index) => InkWell(
+                                          onTap: () {
+                                            BlocProvider.of<TaoThiepBloc>(
+                                                    context)
+                                                .add(ChangColor(
+                                                    listColor[index]));
+                                          },
+                                          child: Container(
+                                            width: 30,
+                                            height: 30,
+                                            margin: EdgeInsets.only(
+                                                left: 10, right: 10),
+                                            decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: listColor[index],
+                                                border: Border.all(
+                                                    color:
+                                                        AppTheme.nearlyYellow,
+                                                    width: 2)),
+                                          ),
+                                        )),
+                              ),
+                            ),
+                          ),
+                          Container(
+                              // margin: EdgeInsets.only(bottom: 5),
+                              child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                Language.of(context)
+                                        .getText("tao_thiep.co_chu") +
+                                    ": ",
+                                style: AppTheme.caption,
+                              ),
+                              Text(
+                                ' $valueHolder',
+                                style: AppTheme.body3,
+                              ),
+                            ],
+                          )),
+                          Center(
+                              child: Column(children: [
+                            Container(
+//                            margin: EdgeInsets.only(bottom: 15),
+                              child: Slider(
+                                value: valueHolder.toDouble(),
+                                min: 1,
+                                max: 30,
+                                divisions: 50,
+                                activeColor: AppTheme.nearlyYellow,
+                                inactiveColor: AppTheme.nearlyYellow,
+                                label: '${valueHolder.round()}',
+                                onChanged: (double newValue) {
+                                  setState(() {
+                                    valueHolder = newValue.round();
+                                  });
+                                  BlocProvider.of<TaoThiepBloc>(context)
+                                      .add(ChangeSize(valueHolder));
+                                },
+                                semanticFormatterCallback: (double newValue) {
+                                  return '${newValue.round()}';
+                                },
+                              ),
+                            ),
+                          ])),
+                          Container(
+                            margin: EdgeInsets.only(bottom: 5),
+                            child: Text(
+                              Language.of(context)
+                                  .getText("tao_thiep.kieu_chu"),
+                              style: AppTheme.caption,
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(bottom: 15),
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: List.generate(
+                                    fontText.length,
+                                    (index) => InkWell(
+                                          onTap: () {
+                                            BlocProvider.of<TaoThiepBloc>(
+                                                    context)
+                                                .add(
+                                              ChangeFont(
+                                                index.toString(),
+                                              ),
+                                            );
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.only(
+                                              left: 10,
+                                              right: 10,
+                                            ),
+                                            decoration: BoxDecoration(),
+                                            child: Text(
+                                              "New Year",
+                                              style: fontText[index],
+                                            ),
+                                          ),
+                                        )),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : Container(),
+            ],
+          ),
+        );
+      },
     );
   }
 }

@@ -74,53 +74,60 @@ class _CountdownState extends State<Countdown> {
   // }
 
   Widget itemTimer(String time, String timeUnit, String image) {
-    return Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(4.0)),
-          child: Image(
-            image: AssetImage(image),
-            fit: BoxFit.cover,
+    return Container(
+      decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(color: AppTheme.nearlyYellow.withOpacity(0.3),
+              offset: const Offset(2.0, 2.0),
+              blurRadius: 2.0,
+              spreadRadius: 2.0,
+            ),
+          ],
+      ),
+      child: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(4.0)),
+            child: Image(
+              image: AssetImage(image),
+              fit: BoxFit.cover,
+              width: 80,
+              height: DeviceUtil.getDeviceHeight(context) / 10,
+              alignment: Alignment.center,
+            ),
+          ),
+          Container(
             width: 80,
-            height: DeviceUtil.getDeviceHeight(context) / 10,
-            alignment: Alignment.center,
-          ),
-        ),
-        Container(
-          width: 80,
-          padding: EdgeInsets.all(8.0),
-          // decoration: BoxDecoration(
-          //   color: Colors.red.withOpacity(0.8),
-          //   borderRadius: BorderRadius.all(Radius.circular(4.0)),
-          // ),
-          child: Column(
-            children: [
-              Text(
-                time,
-                style: TextStyle(
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.18,
-                  color: AppTheme.nearlyYellow,
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Text(
+                  time,
+                  style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.18,
+                    color: AppTheme.nearlyYellow,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Text(
-                timeUnit,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.18,
-                  color: AppTheme.nearlyYellow,
+                SizedBox(
+                  height: 5,
                 ),
-              )
-            ],
+                Text(
+                  timeUnit,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.18,
+                    color: AppTheme.nearlyYellow,
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -131,8 +138,8 @@ class _CountdownState extends State<Countdown> {
       //height: 0.7*DeviceUtil.getDeviceHeight(context),
       padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
       decoration: BoxDecoration(
-        //color: Colors.black.withOpacity(0.1),
         borderRadius: BorderRadius.all(Radius.circular(4.0)),
+
       ),
       child: CountdownTimer(
         controller: controller,

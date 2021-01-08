@@ -21,20 +21,24 @@ class DialogConfirmTextState extends State<DialogConfirmText>
     with TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey1 = new GlobalKey<ScaffoldState>();
   BuildContext context1;
-  TextEditingController controller=new TextEditingController();
+  TextEditingController controller = new TextEditingController();
 
   Widget ButtonWidget() {
     return Container();
   }
 
-  Widget build(BuildContext context) {
-    return BlocConsumer<TaoThiepBloc,TaoThiepState>(
-      listener: (context, state) {
+  void initState() {}
 
+  Widget build(BuildContext context) {
+    return BlocConsumer<TaoThiepBloc, TaoThiepState>(
+      listener: (context, state) {
+        // controller.text=state.loiChuc;
       },
       builder: (context, state) {
-        return  Dialog(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14.0)),
+        return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14.0),
+            ),
             child: Stack(
               overflow: Overflow.visible,
               alignment: Alignment.topCenter,
@@ -48,7 +52,7 @@ class DialogConfirmTextState extends State<DialogConfirmText>
                       children: [
                         Container(
                           alignment: Alignment.center,
-                          height: 0.3 * DeviceUtil.getDeviceHeight(context),
+                          height: 0.4 * DeviceUtil.getDeviceHeight(context),
                           decoration: BoxDecoration(
                             color: Colors.grey.withOpacity(0.3),
                             borderRadius: BorderRadius.circular(10),
@@ -59,7 +63,8 @@ class DialogConfirmTextState extends State<DialogConfirmText>
                             maxLines: null,
                             decoration: InputDecoration(
                               hintStyle: TextStyle(fontSize: 17),
-                              hintText: 'Nhập lời chúc của bạn...',
+                              hintText: Language.of(context)
+                                  .getText("tao_thiep.nhap_loi_chuc"),
                               border: InputBorder.none,
                               contentPadding: EdgeInsets.all(20),
                             ),
@@ -68,21 +73,29 @@ class DialogConfirmTextState extends State<DialogConfirmText>
                         ),
                         RaisedButton(
                           onPressed: () {
-                            BlocProvider.of<TaoThiepBloc>(context).add(ChangeText(controller.text));
+                            BlocProvider.of<TaoThiepBloc>(context).add(
+                              ChangeText(controller.text),
+                            );
                             Navigator.of(context).pop();
                           },
                           color: AppTheme.nearlyDarkBrown,
                           child: Container(
                             padding: EdgeInsets.only(
-                                top: 10, bottom: 10, left: 20, right: 20),
+                              top: 10,
+                              bottom: 10,
+                              left: 20,
+                              right: 20,
+                            ),
                             decoration: BoxDecoration(
                               color: AppTheme.nearlyDarkBrown.withOpacity(0.7),
                               borderRadius: BorderRadius.all(
                                 Radius.circular(30),
                               ),
                             ),
-
-                            child: Text( Language.of(context).getText("xac_nhan.xac_nhan"),style: AppTheme.body1,),
+                            child: Text(
+                              Language.of(context).getText("xac_nhan.xac_nhan"),
+                              style: AppTheme.body1,
+                            ),
                           ),
                         )
                       ],
@@ -90,16 +103,17 @@ class DialogConfirmTextState extends State<DialogConfirmText>
                   ),
                 ),
                 Positioned(
-                    top: -30,
-                    child: CircleAvatar(
-                      backgroundColor: AppTheme.nearlyYellow,
-                      radius: 30,
-                      child: Icon(
-                        Icons.mode_edit,
-                        color: AppTheme.nearlyDarkBrown.withOpacity(0.7),
-                        size: 30,
-                      ),
-                    )),
+                  top: -30,
+                  child: CircleAvatar(
+                    backgroundColor: AppTheme.nearlyYellow,
+                    radius: 30,
+                    child: Icon(
+                      Icons.mode_edit,
+                      color: AppTheme.nearlyDarkBrown.withOpacity(0.7),
+                      size: 30,
+                    ),
+                  ),
+                ),
               ],
             ));
       },

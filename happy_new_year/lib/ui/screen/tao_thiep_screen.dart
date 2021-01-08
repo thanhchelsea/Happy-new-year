@@ -1,5 +1,6 @@
+import 'dart:io';
 import 'dart:typed_data';
-
+import 'package:dio/dio.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,9 @@ import 'package:happy_new_year/ui/widget/widget_to_image.dart';
 import 'package:happy_new_year/utils/common.dart';
 import 'package:happy_new_year/utils/device.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class TaoThiepScreen extends StatefulWidget {
   @override
@@ -48,11 +52,22 @@ class _BodyThiepState extends State<BodyThiep> {
 
   Uint8List bytes1;
   GlobalKey key1;
-  _shareImages() async {
-    print("sasa");
 
+  _saveImage() async {
     this.bytes1 = bytes1;
+    try {
+      final bytes1 = await Common.capture(key1);
+      if (!(await Permission.storage.status.isGranted))
+        await Permission.storage.request();
+     await ImageGallerySaver.saveImage(bytes1, quality: 80);
+      showDemoDialog(context: context, isShowsaveimage: true);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
+  _shareImages() async {
+    this.bytes1 = bytes1;
     try {
       final bytes1 = await Common.capture(key1);
       await Share.files(
@@ -121,8 +136,12 @@ class _BodyThiepState extends State<BodyThiep> {
             case 4:
               {
                 _shareImages();
-
                 break;
+              }
+            case 5:
+              {
+                print("luu");
+                _saveImage();
               }
           }
         });
@@ -151,11 +170,12 @@ class _BodyThiepState extends State<BodyThiep> {
     );
   }
 
-  void showDemoDialog({BuildContext context, state}) {
+  void showDemoDialog({BuildContext context, state, isShowsaveimage}) {
     showDialog<dynamic>(
       context: context,
       builder: (BuildContext context) => DialogConfirmText(
         barrierDismissible: true,
+        isShowSaveImage: isShowsaveimage,
       ),
     );
   }
@@ -321,7 +341,7 @@ class _BodyThiepState extends State<BodyThiep> {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: List.generate(
-                                5,
+                                6,
                                 (index) => item(listItem[index].title,
                                     listItem[index].icon, index),
                               ),
@@ -392,35 +412,30 @@ class _ItemSelectState extends State<ItemSelect> {
 
     fontText.add(
       GoogleFonts.rye(
-        //pinyonScript , lato ,share ,zeyada,yesevaOne,rye
         fontSize: 14,
         color: AppTheme.black,
       ),
     );
     fontText.add(
       GoogleFonts.pinyonScript(
-        //pinyonScript , lato ,share ,zeyada,yesevaOne,rye
         fontSize: 14,
         color: AppTheme.black,
       ),
     );
     fontText.add(
       GoogleFonts.lato(
-        //pinyonScript , lato ,share ,zeyada,yesevaOne,rye
         fontSize: 14,
         color: AppTheme.black,
       ),
     );
     fontText.add(
       GoogleFonts.share(
-        //pinyonScript , lato ,share ,zeyada,yesevaOne,rye
         fontSize: 14,
         color: AppTheme.black,
       ),
     );
     fontText.add(
       GoogleFonts.tangerine(
-        //pinyonScript , lato ,share ,zeyada,yesevaOne,rye
         fontSize: 14,
         color: AppTheme.black,
       ),
@@ -538,14 +553,17 @@ class _ItemSelectState extends State<ItemSelect> {
                                             width: 30,
                                             height: 30,
                                             margin: EdgeInsets.only(
-                                                left: 10, right: 10),
+                                              left: 10,
+                                              right: 10,
+                                            ),
                                             decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: listColor[index],
-                                                border: Border.all(
-                                                    color:
-                                                        AppTheme.nearlyYellow,
-                                                    width: 2)),
+                                              shape: BoxShape.circle,
+                                              color: listColor[index],
+                                              border: Border.all(
+                                                color: AppTheme.nearlyYellow,
+                                                width: 2,
+                                              ),
+                                            ),
                                           ),
                                         )),
                               ),

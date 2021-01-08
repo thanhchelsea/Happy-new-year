@@ -52,9 +52,9 @@ class InitThiep extends TaoThiepState {
     String image,
     String loiChuc,
   }) : super(
-          size: 12,
+          size: 14,
           font: "0",
-          color: AppTheme.black,
+          color: AppTheme.nearlyDarkBrown,
           image: AppImages.THIEP6,
           loiChuc: "Happy new Year",
         );

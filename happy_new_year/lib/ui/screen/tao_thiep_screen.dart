@@ -118,12 +118,12 @@ class _BodyThiepState extends State<BodyThiep> {
                 isDoiKieuChu = false;
                 break;
               }
-            case 4:{
+            case 4:
+              {
+                _shareImages();
 
-              _shareImages();
-
-              break;
-            }
+                break;
+              }
           }
         });
       },
@@ -163,8 +163,16 @@ class _BodyThiepState extends State<BodyThiep> {
   String contentText = "Chúc mừng năm mới 2021";
   TextStyle fontText = GoogleFonts.rye(
     fontSize: 14,
-    color: AppTheme.black,
+    color: AppTheme.nearlyDarkBrown,
   );
+  Offset position = Offset.zero;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    position = new Offset(50, 50);
+  }
+
   @override
   Widget build(BuildContext context) {
     listItem.add(new ListItemSlect("tao_thiep.loi_chuc", Icons.title));
@@ -244,39 +252,50 @@ class _BodyThiepState extends State<BodyThiep> {
       },
       builder: (context, state) {
         return Container(
-          color: AppTheme.nealyRed,
+          color: AppTheme.black,
+          alignment: Alignment.center,
           width: DeviceUtil.getDeviceWidth(context),
           height: DeviceUtil.getDeviceHeight(context) - 70,
           child: Container(
             child: Stack(
               children: <Widget>[
                 Container(
-                    padding: EdgeInsets.only(top: 20, bottom: 20),
-                    alignment: Alignment.center,
-                    // width: DeviceUtil.getDeviceWidth(context),
-                    //   height: (7 / 8) * DeviceUtil.getDeviceHeight(context) - 70,
-                    //margin: EdgeInsets.all(20),
-                    child:WidgetToImage(
-                      builder: (key) {
-                        this.key1 = key;
-                        return  Stack(
-                          alignment: Alignment.center,
-                          children: <Widget>[
-                            Image(
-                              image: AssetImage(state.image),
-                            ),
-                            Container(
-                              width: 300,
-                              child: Text(
-                                state.loiChuc,
-                                textAlign: TextAlign.center,
-                                style: fontText,
+                  padding: EdgeInsets.only(top: 20, bottom: 20),
+                  alignment: Alignment.center,
+                  child: WidgetToImage(
+                    builder: (key) {
+                      this.key1 = key;
+                      return Stack(
+                        alignment: Alignment.center,
+                        children: <Widget>[
+                          Image(
+                            image: AssetImage(state.image),
+                          ),
+                          Positioned(
+                            left: position.dx, //right: position.dx,
+                            top: position.dy, //bottom: position.dy,
+                            child: GestureDetector(
+                              onPanUpdate: (details) {
+                                setState(() {
+                                  position = Offset(
+                                      position.dx + details.delta.dx,
+                                      position.dy + details.delta.dy);
+                                });
+                              },
+                              child: Container(
+                                child: Text(
+                                  state.loiChuc,
+                                  textAlign: TextAlign.center,
+                                  style: fontText,
+                                ),
+                                padding: EdgeInsets.all(10),
                               ),
                             ),
-                          ],
-                        );
-                      },
-                    ),
+                          )
+                        ],
+                      );
+                    },
+                  ),
                 ),
                 Positioned(
                   bottom: 0,
@@ -354,12 +373,12 @@ class _ItemSelectState extends State<ItemSelect> {
 
     listImage.add(AppImages.THIEP6);
     listImage.add(AppImages.THIEP1);
+    listImage.add(AppImages.THIEP7);
     listImage.add(AppImages.THIEP2);
     listImage.add(AppImages.THIEP3);
     listImage.add(AppImages.THIEP4);
     listImage.add(AppImages.THIEP5);
-    listImage.add(AppImages.ANH_NEN2);
-    listImage.add(AppImages.ANH_NEN4);
+    listImage.add(AppImages.ANH_NEN7);
 
     listColor.add(Color(0xfffdcb6e));
     listColor.add(Color(0xff2d3436));

@@ -3,7 +3,6 @@ class AppImages {
   static const String ANH_NEN1 = "assets/images/anhnen1.jpg";
   static const String ANH_NEN2 = "assets/images/anhnen2.jpg";
   static const String ANH_NEN3 = "assets/images/anhnen3.jpg";
-  static const String ANH_NEN4 = "assets/images/anhnen4.jpg";
   static const String ANH_NEN5 = "assets/images/anhnen5.jpg";
   static const String ANH_NEN6 = "assets/images/anhnen6.jpg";
   static const String ANH_NEN7 = "assets/images/anhnen7.jpg";
@@ -37,4 +36,5 @@ class AppImages {
   static const String THIEP4 = "assets/thieptet/thiep4.jpg";
   static const String THIEP5 = "assets/thieptet/thiep5.jpg";
   static const String THIEP6 = "assets/thieptet/thiep6.jpg";
+  static const String THIEP7 = "assets/thieptet/thiep7.jpg";
 }

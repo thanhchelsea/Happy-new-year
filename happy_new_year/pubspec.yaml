@@ -47,6 +47,8 @@ dependencies:
   flip_card: ^0.4.4
   flutter_countdown_timer: ^2.0.0
   google_fonts: ^0.3.8
+  image_gallery_saver: ^1.6.7
+  permission_handler: ^5.0.1+1
 dev_dependencies:
   flutter_test:
     sdk: flutter

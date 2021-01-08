@@ -8,11 +8,13 @@ import 'package:happy_new_year/res/resources.dart';
 import 'package:happy_new_year/utils/ultils.dart';
 
 class DialogConfirmText extends StatefulWidget {
-  const DialogConfirmText({
+   DialogConfirmText({
     Key key,
     this.barrierDismissible = true,
+    this.isShowSaveImage,
   }) : super(key: key);
-  final bool barrierDismissible;
+   bool barrierDismissible=false;
+  final bool isShowSaveImage;
   @override
   DialogConfirmTextState createState() => DialogConfirmTextState();
 }
@@ -43,7 +45,7 @@ class DialogConfirmTextState extends State<DialogConfirmText>
               overflow: Overflow.visible,
               alignment: Alignment.topCenter,
               children: [
-                Container(
+                widget.isShowSaveImage==false|| widget.isShowSaveImage==null?  Container(
                   height: 0.5 * DeviceUtil.getDeviceHeight(context),
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
@@ -101,6 +103,9 @@ class DialogConfirmTextState extends State<DialogConfirmText>
                       ],
                     ),
                   ),
+                ):Container(
+                  padding: EdgeInsets.all(50),
+                  child: Text(Language.of(context).getText("tao_thiep.saved"),style: AppTheme.subtitle,),
                 ),
                 Positioned(
                   top: -30,
@@ -108,7 +113,7 @@ class DialogConfirmTextState extends State<DialogConfirmText>
                     backgroundColor: AppTheme.nearlyYellow,
                     radius: 30,
                     child: Icon(
-                      Icons.mode_edit,
+                      widget.isShowSaveImage==false|| widget.isShowSaveImage==null?  Icons.mode_edit:Icons.save_alt,
                       color: AppTheme.nearlyDarkBrown.withOpacity(0.7),
                       size: 30,
                     ),

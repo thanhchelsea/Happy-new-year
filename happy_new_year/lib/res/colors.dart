@@ -5,7 +5,7 @@ class AppTheme {
 
   static const Color notWhite = Color(0xFFecf0f1);
   static const Color nearlyWhite = Color(0xFFFEFEFE);
-  static const Color white = Color(0xFFFFFFFF);
+  static const Color white = Color(0xffecf0f1);
   static const Color nearlyBlack = Color(0xFF34495e);
   static const Color grey = Color(0xFF3A5160);
   static const Color dark_grey = Color(0xFF313A44);
@@ -28,7 +28,8 @@ class AppTheme {
   // mau dung cho app
   static const Color nearlyDarkBrown = Color(0xFF990033);
   static const Color nearlyYellow = Color(0xFFffdd59);
-  static const Color nealyRed= Color(0xffc0392b);
+  static const Color nealyRed = Color(0xffc0392b);
+  static const Color red = Color(0xffd32f2f);
   static const Color teal = Color(0xFF0be881);
   static const Color blue = Color(0xFF3498db);
   static const Color black = Color(0xFF34495e);

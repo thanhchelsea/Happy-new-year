@@ -1,6 +1,4 @@
-import 'dart:io';
 import 'dart:typed_data';
-import 'package:dio/dio.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,15 +15,9 @@ import 'package:happy_new_year/utils/common.dart';
 import 'package:happy_new_year/utils/device.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class TaoThiepScreen extends StatefulWidget {
-  @override
-  _TaoThiepScreenState createState() => _TaoThiepScreenState();
-}
-
-class _TaoThiepScreenState extends State<TaoThiepScreen> {
+class TaoThiepScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseScreen(
@@ -170,19 +162,20 @@ class _BodyThiepState extends State<BodyThiep> {
     );
   }
 
-  void showDemoDialog({BuildContext context, state, isShowsaveimage}) {
+  void showDemoDialog({BuildContext context,bool isShowsaveimage}) {
     showDialog<dynamic>(
       context: context,
       builder: (BuildContext context) => DialogConfirmText(
         barrierDismissible: true,
         isShowSaveImage: isShowsaveimage,
+        isTaoThiepScreen: true,
       ),
     );
   }
 
   String contentText = "Chúc mừng năm mới 2021";
   TextStyle fontText = GoogleFonts.rye(
-    fontSize: 14,
+    fontSize: 12,
     color: AppTheme.nearlyDarkBrown,
   );
   Offset position = Offset.zero;
@@ -398,7 +391,11 @@ class _ItemSelectState extends State<ItemSelect> {
     listImage.add(AppImages.THIEP3);
     listImage.add(AppImages.THIEP4);
     listImage.add(AppImages.THIEP5);
+    listImage.add(AppImages.THIEP8);
+    listImage.add(AppImages.THIEP9);
+    listImage.add(AppImages.THIEP10);
     listImage.add(AppImages.ANH_NEN7);
+
 
     listColor.add(Color(0xfffdcb6e));
     listColor.add(Color(0xff2d3436));

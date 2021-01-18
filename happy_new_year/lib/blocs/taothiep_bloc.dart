@@ -52,7 +52,7 @@ class InitThiep extends TaoThiepState {
     String image,
     String loiChuc,
   }) : super(
-          size: 14,
+          size: 12,
           font: "0",
           color: AppTheme.nearlyDarkBrown,
           image: AppImages.THIEP6,
@@ -112,9 +112,10 @@ class ChangeColorState extends TaoThiepState {
 }
 
 class TaoThiepBloc extends Bloc<TaoThiepEvent, TaoThiepState> {
-  @override
-  // TODO: implement initialState
-  TaoThiepState get initialState => InitThiep();
+  // @override
+  // // TODO: implement initialState
+  // TaoThiepState get initialState => InitThiep();
+  TaoThiepBloc():super(InitThiep());
 
   @override
   Stream<TaoThiepState> mapEventToState(TaoThiepEvent event) async* {

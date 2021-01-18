@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:happy_new_year/res/resources.dart';
 import 'package:happy_new_year/routes.dart';
+import 'package:happy_new_year/ui/screen/screen.dart';
 import 'package:happy_new_year/utils/ultils.dart';
 import '../constants.dart';
 import '../localizations.dart';
@@ -42,6 +43,15 @@ class MyApp extends StatelessWidget {
       localeResolutionCallback: (locale, supportedLocales) =>
           _localeCallback(locale, supportedLocales),
       initialRoute: Routes.initScreen(),
+      onGenerateRoute: (settings) {
+        if (settings.name == Routes.loi_chuc_detail) {
+          String arg = settings.arguments;
+          return MaterialPageRoute(
+            builder: (_) => LoiChucDetailScreen(title: arg,),
+          );
+        }
+        return null;
+      },
       routes: Routes.routes,
     );
   }

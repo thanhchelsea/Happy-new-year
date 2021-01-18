@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:happy_new_year/blocs/blocs.dart';
 import 'package:happy_new_year/localizations.dart';
 import 'package:happy_new_year/res/images.dart';
 import 'package:happy_new_year/res/resources.dart';
@@ -124,13 +126,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: ItemApp(
                                   AppImages.ICON_THIEP_TET,
                                   "home.tao_thiep",
-                                  method:(){ Navigator.pushNamed(context, Routes.taothiep);},
+                                  method: () {
+                                    BlocProvider.of<TaoThiepBloc>(context).add(ChangeText("")) ;
+                                    Navigator.pushNamed(
+                                      context,
+                                      Routes.taothiep,
+                                    );
+                                  },
                                 ),
                               ),
                               Container(
-                                  alignment: Alignment.center,
-                                  child: ItemApp(AppImages.ICON_THIEP,
-                                      "home.loi_chuc_tet")),
+                                alignment: Alignment.center,
+                                child: ItemApp(
+                                  AppImages.ICON_THIEP,
+                                  "home.loi_chuc_tet",
+                                  method: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      Routes.loichuc,
+                                    );
+                                  },
+                                ),
+                              ),
                               Container(
                                   alignment: Alignment.center,
                                   child: ItemApp(

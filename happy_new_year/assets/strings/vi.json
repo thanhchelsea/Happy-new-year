@@ -39,5 +39,18 @@
     "kieu_chu": "Kiểu chữ",
     "nhap_loi_chuc": "Nhập lời chúc của bạn...",
     "saved": "Lưu thiệp thành công!"
+  },
+
+  "loi_chuc": {
+    "title": "Lời chúc tết",
+    "tao_loi_chuc": "Tạo lời chúc",
+    "tin_nhan_hinh": "Tin nhắn hình cute",
+    "tho_chuc_tet": "Thơ chúc tết",
+    "chuc_tet_ong_ba": "Chúc tết ông bà",
+    "chuc_tet_bo_me": "Chúc tết bố mẹ",
+    "chuc_tet_co_di_chu_bac": "Chúc tết cô, dì, chú, bác",
+    "chuc_tet_thay_co": "Chúc tết thầy cô",
+    "chuc_tet_vo_chong": "Chúc tết người yêu, vợ chồng",
+    "chuc_tet_sep": "Chúc tết sếp"
   }
 }

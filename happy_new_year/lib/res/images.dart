@@ -9,6 +9,7 @@ class AppImages {
   static const String ANH_NEN8 = "assets/images/anhnen8.jpg";
   static const String BACKGROUND_LIXI = "assets/images/anhnen10.jpg";
   static const String ANH_NEN12 = "assets/images/anhnen12.png";
+  static const String BACKGROUND_LOICHUC = "assets/images/anhnen6.jpg";
 
   //anh appbar
   static const String APP_BAR = "assets/images/appbar.jpg";
@@ -37,4 +38,8 @@ class AppImages {
   static const String THIEP5 = "assets/thieptet/thiep5.jpg";
   static const String THIEP6 = "assets/thieptet/thiep6.jpg";
   static const String THIEP7 = "assets/thieptet/thiep7.jpg";
+  static const String THIEP8 = "assets/thieptet/thiep8.jpeg";
+  static const String THIEP9 = "assets/thieptet/thiep9.jpeg";
+  static const String THIEP10 = "assets/thieptet/thiep10.jpeg";
+
 }

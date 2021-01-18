@@ -8,13 +8,19 @@ import 'package:happy_new_year/res/resources.dart';
 import 'package:happy_new_year/utils/ultils.dart';
 
 class DialogConfirmText extends StatefulWidget {
-   DialogConfirmText({
+  DialogConfirmText({
     Key key,
     this.barrierDismissible = true,
     this.isShowSaveImage,
+    this.isTaoThiepScreen,
+    this.index,
   }) : super(key: key);
-   bool barrierDismissible=false;
+
+  bool barrierDismissible = false;
   final bool isShowSaveImage;
+  final bool isTaoThiepScreen;
+  final int index;
+
   @override
   DialogConfirmTextState createState() => DialogConfirmTextState();
 }
@@ -29,7 +35,11 @@ class DialogConfirmTextState extends State<DialogConfirmText>
     return Container();
   }
 
-  void initState() {}
+  @override
+  void initState() {
+    super.initState();
+    controller.text = BlocProvider.of<TaoThiepBloc>(context).state.loiChuc;
+  }
 
   Widget build(BuildContext context) {
     return BlocConsumer<TaoThiepBloc, TaoThiepState>(
@@ -45,75 +55,96 @@ class DialogConfirmTextState extends State<DialogConfirmText>
               overflow: Overflow.visible,
               alignment: Alignment.topCenter,
               children: [
-                widget.isShowSaveImage==false|| widget.isShowSaveImage==null?  Container(
-                  height: 0.5 * DeviceUtil.getDeviceHeight(context),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          alignment: Alignment.center,
-                          height: 0.4 * DeviceUtil.getDeviceHeight(context),
-                          decoration: BoxDecoration(
-                            color: Colors.grey.withOpacity(0.3),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: TextField(
-                            controller: controller,
-                            keyboardType: TextInputType.multiline,
-                            maxLines: null,
-                            decoration: InputDecoration(
-                              hintStyle: TextStyle(fontSize: 17),
-                              hintText: Language.of(context)
-                                  .getText("tao_thiep.nhap_loi_chuc"),
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.all(20),
-                            ),
-                            textAlign: TextAlign.center,
+                widget.isShowSaveImage == false ||
+                        widget.isShowSaveImage == null
+                    ? Container(
+                        height: 0.5 * DeviceUtil.getDeviceHeight(context),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                alignment: Alignment.center,
+                                height:
+                                    0.4 * DeviceUtil.getDeviceHeight(context),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.withOpacity(0.3),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: TextField(
+                                  controller: controller,
+                                  keyboardType: TextInputType.multiline,
+                                  maxLines: null,
+                                  decoration: InputDecoration(
+                                    hintStyle: TextStyle(fontSize: 16),
+                                    hintText: Language.of(context)
+                                        .getText("tao_thiep.nhap_loi_chuc"),
+                                    border: InputBorder.none,
+                                    contentPadding: EdgeInsets.all(20),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              RaisedButton(
+                                onPressed: () {
+                                  (widget.isTaoThiepScreen)
+                                      ? BlocProvider.of<TaoThiepBloc>(context)
+                                          .add(
+                                          ChangeText(controller.text),
+                                        )
+                                      : BlocProvider.of<LoiChucBloc>(context)
+                                          .add(
+                                          LoiChucChanged(
+                                            changeText: controller.text,
+                                            index: widget.index,
+                                          ),
+                                        );
+                                  Navigator.of(context).pop();
+                                },
+                                color: AppTheme.nearlyDarkBrown,
+                                child: Container(
+                                  padding: EdgeInsets.only(
+                                    top: 10,
+                                    bottom: 10,
+                                    left: 20,
+                                    right: 20,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: AppTheme.nearlyDarkBrown
+                                        .withOpacity(0.7),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    Language.of(context)
+                                        .getText("xac_nhan.xac_nhan"),
+                                    style: AppTheme.body1,
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                         ),
-                        RaisedButton(
-                          onPressed: () {
-                            BlocProvider.of<TaoThiepBloc>(context).add(
-                              ChangeText(controller.text),
-                            );
-                            Navigator.of(context).pop();
-                          },
-                          color: AppTheme.nearlyDarkBrown,
-                          child: Container(
-                            padding: EdgeInsets.only(
-                              top: 10,
-                              bottom: 10,
-                              left: 20,
-                              right: 20,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppTheme.nearlyDarkBrown.withOpacity(0.7),
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(30),
-                              ),
-                            ),
-                            child: Text(
-                              Language.of(context).getText("xac_nhan.xac_nhan"),
-                              style: AppTheme.body1,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ):Container(
-                  padding: EdgeInsets.all(50),
-                  child: Text(Language.of(context).getText("tao_thiep.saved"),style: AppTheme.subtitle,),
-                ),
+                      )
+                    : Container(
+                        padding: EdgeInsets.all(50),
+                        child: Text(
+                          Language.of(context).getText("tao_thiep.saved"),
+                          style: AppTheme.subtitle,
+                        ),
+                      ),
                 Positioned(
                   top: -30,
                   child: CircleAvatar(
                     backgroundColor: AppTheme.nearlyYellow,
                     radius: 30,
                     child: Icon(
-                      widget.isShowSaveImage==false|| widget.isShowSaveImage==null?  Icons.mode_edit:Icons.save_alt,
+                      widget.isShowSaveImage == false ||
+                              widget.isShowSaveImage == null
+                          ? Icons.mode_edit
+                          : Icons.save_alt,
                       color: AppTheme.nearlyDarkBrown.withOpacity(0.7),
                       size: 30,
                     ),

@@ -112,9 +112,8 @@ class ChangeColorState extends TaoThiepState {
 }
 
 class TaoThiepBloc extends Bloc<TaoThiepEvent, TaoThiepState> {
-  @override
-  // TODO: implement initialState
-  TaoThiepState get initialState => InitThiep();
+  TaoThiepBloc({TaoThiepState initialState}) : super(InitThiep());
+
 
   @override
   Stream<TaoThiepState> mapEventToState(TaoThiepEvent event) async* {

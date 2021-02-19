@@ -93,8 +93,8 @@ class AddMoneyState extends LiXiState {
   );
 }
 class LiXiBloc extends Bloc<LiXiEvent, LiXiState> {
-  @override
-  LiXiState get initialState => InitialLiXiState();
+  LiXiBloc({LiXiState initialState}) : super(InitialLiXiState());
+
   @override
   Stream<LiXiState> mapEventToState(LiXiEvent event) async* {
     if (event is ChonLiXi) {

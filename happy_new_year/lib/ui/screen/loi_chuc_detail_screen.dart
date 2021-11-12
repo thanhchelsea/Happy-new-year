@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -25,7 +23,7 @@ class _LoiChucDetailScreenState extends State<LoiChucDetailScreen> {
 
   Future _shareMessage(String content) async {
     try {
-      Share.text('title', content, 'text/plain');
+   //   Share.text('title', content, 'text/plain');
     } catch (e) {
       print('error: $e');
     }

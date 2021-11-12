@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -62,12 +61,12 @@ class _BodyThiepState extends State<BodyThiep> {
     this.bytes1 = bytes1;
     try {
       final bytes1 = await Common.capture(key1);
-      await Share.files(
-          'esys images',
-          {
-            'esys.png': bytes1.buffer.asUint8List(),
-          },
-          'image/png');
+      // await Share.files(
+      //     'esys images',
+      //     {
+      //       'esys.png': bytes1.buffer.asUint8List(),
+      //     },
+      //     'image/png');
     } catch (e) {
       print('error: $e');
     }

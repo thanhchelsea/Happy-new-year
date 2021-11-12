@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:happy_new_year/localizations.dart';
 import 'package:happy_new_year/res/resources.dart';
-import 'package:polygon_clipper/polygon_border.dart';
 
 class ItemApp extends StatelessWidget {
   String imageIcon;
@@ -29,11 +28,7 @@ class ItemApp extends StatelessWidget {
                 ),
               ],
               color: AppTheme.nearlyYellow,
-              shape: PolygonBorder(
-                sides: 6,
-                borderRadius: 8.0,
-                border: BorderSide(color: AppTheme.nealyRed, width: 3),
-              ),
+              shape: Border.all(),
             ),
             child: Image(
               image: AssetImage(imageIcon),

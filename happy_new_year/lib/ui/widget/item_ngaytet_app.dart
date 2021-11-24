@@ -15,28 +15,25 @@ class ItemAppNgayTet extends StatelessWidget {
       onTap: () {
         method();
       },
-      child: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(24)),
-            child: Image(
-              image: AssetImage(image),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(40.0),
+        ),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            image: DecorationImage(
               fit: BoxFit.cover,
-              width: DeviceUtil.getDeviceWidth(context) / 2 - 20,
-              height: DeviceUtil.getDeviceHeight(context) / 7,
-              alignment: Alignment.center,
+              image: AssetImage(image),
             ),
           ),
-          Container(
-            alignment: Alignment.center,
-            // margin: EdgeInsets.only(left: 10),
-            child: Text(
-              Language.of(context).getText(title),
-              style: AppTheme.title,
-            ),
-          )
-        ],
+          alignment: Alignment.center,
+          // margin: EdgeInsets.only(left: 10),
+          child: Text(
+            Language.of(context).getText(title),
+            style: AppTheme.title,
+          ),
+        ),
       ),
     );
   }

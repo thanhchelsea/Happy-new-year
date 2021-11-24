@@ -2,16 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:happy_new_year/localizations.dart';
 import 'package:happy_new_year/res/resources.dart';
+import 'package:flutter_polygon/flutter_polygon.dart';
 
 class ItemApp extends StatelessWidget {
   String imageIcon;
   String title;
   Function method;
-  ItemApp(this.imageIcon, this.title,{this.method});
+  ItemApp(this.imageIcon, this.title, {this.method});
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){method();},
+      onTap: () {
+        method();
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,7 +31,11 @@ class ItemApp extends StatelessWidget {
                 ),
               ],
               color: AppTheme.nearlyYellow,
-              shape: Border.all(),
+              shape: PolygonBorder(
+                sides: 6,
+                borderRadius: 8.0,
+               // border: BorderSide(color: AppTheme.nealyRed, width: 3),
+              ),
             ),
             child: Image(
               image: AssetImage(imageIcon),
@@ -41,7 +48,8 @@ class ItemApp extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               Language.of(context).getText(title),
-              style: AppTheme.subtitle,maxLines: 2,
+              style: AppTheme.subtitle,
+              maxLines: 2,
               textAlign: TextAlign.center,
             ),
           )

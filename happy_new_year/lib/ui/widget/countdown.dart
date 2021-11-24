@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_countdown_timer/current_remaining_time.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
-import 'package:happy_new_year/localizations.dart';
 
 import '../../res/colors.dart';
 import '../../res/resources.dart';
 import '../../utils/ultils.dart';
+import 'package:flutter_polygon/flutter_polygon.dart';
 
 class Countdown extends StatefulWidget {
   @override
@@ -15,8 +15,9 @@ class Countdown extends StatefulWidget {
 
 class _CountdownState extends State<Countdown> {
   CountdownTimerController controller;
-  final DateTime lunarNewYear = DateTime(2021, 2, 12);
+  final DateTime lunarNewYear = DateTime(2022, 2, 1);
 
+  double width, height;
   @override
   void initState() {
     // TODO: implement initState
@@ -30,102 +31,56 @@ class _CountdownState extends State<Countdown> {
       endTime: endTime,
     );
   }
-
+//4 8 9 10
   @override
   void dispose() {
     controller.dispose();
     super.dispose();
   }
 
-  // Widget itemTimer(String time, String timeUnit) {
-  //   return Container(
-  //     width: 80,
-  //     padding: EdgeInsets.all(8.0),
-  //     decoration: BoxDecoration(
-  //       color: Colors.red.withOpacity(0.8),
-  //       borderRadius: BorderRadius.all(Radius.circular(4.0)),
-  //     ),
-  //     child: Column(
-  //       children: [
-  //         Text(
-  //           time,
-  //           style: TextStyle(
-  //             fontSize: 26,
-  //             fontWeight: FontWeight.bold,
-  //             letterSpacing: 0.18,
-  //             color: AppTheme.nearlyYellow,
-  //           ),
-  //         ),
-  //         SizedBox(
-  //           height: 5,
-  //         ),
-  //         Text(
-  //           timeUnit,
-  //           style: TextStyle(
-  //             fontSize: 12,
-  //             fontWeight: FontWeight.bold,
-  //             letterSpacing: 0.18,
-  //             color: AppTheme.nearlyYellow,
-  //           ),
-  //         )
-  //       ],
-  //     ),
-  //   );
-  // }
-
   Widget itemTimer(String time, String timeUnit, String image) {
     return Container(
-      decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(color: AppTheme.nearlyYellow.withOpacity(0.3),
-              offset: const Offset(2.0, 2.0),
-              blurRadius: 2.0,
-              spreadRadius: 2.0,
-            ),
-          ],
+      width: width * 0.24,
+      height: width * 0.24,
+      decoration: ShapeDecoration(
+        shadows: [
+          BoxShadow(
+            offset: const Offset(3.0, 3.0),
+            blurRadius: 3.0,
+            spreadRadius: 1.0,
+          ),
+        ],
+        color: AppTheme.red,
+        shape: PolygonBorder(
+          sides: 4,
+          borderRadius: 8.0,
+          // border: BorderSide(color: AppTheme.nealyRed, width: 3),
+        ),
       ),
-      child: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(4.0)),
-            child: Image(
-              image: AssetImage(image),
-              fit: BoxFit.cover,
-              width: 80,
-              height: DeviceUtil.getDeviceHeight(context) / 10,
-              alignment: Alignment.center,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            time,
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.18,
+              color: AppTheme.nearlyYellow,
             ),
           ),
-          Container(
-            width: 80,
-            padding: EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Text(
-                  time,
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.18,
-                    color: AppTheme.nearlyYellow,
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  timeUnit,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 0.18,
-                    color: AppTheme.nearlyYellow,
-                  ),
-                )
-              ],
-            ),
+          SizedBox(
+            height: 5,
           ),
+          Text(
+            timeUnit,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 0.18,
+              color: AppTheme.nearlyYellow,
+            ),
+          )
         ],
       ),
     );
@@ -133,56 +88,98 @@ class _CountdownState extends State<Countdown> {
 
   @override
   Widget build(BuildContext context) {
+    width = DeviceUtil.getDeviceWidth(context);
+    height = DeviceUtil.getDeviceHeight(context);
     return Container(
-      width: 400,
-      //height: 0.7*DeviceUtil.getDeviceHeight(context),
       padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(4.0)),
-
       ),
-      child: CountdownTimer(
-        controller: controller,
-        widgetBuilder: (_, CurrentRemainingTime time) {
-          if (time == null) {
-            return Text('Game Over');
-          }
-          return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              itemTimer(
-                time.days != null
-                    ? (time.days < 10 ? '0${time.days}' : time.days.toString())
-                    : '00',
-                'Ngày',
-                AppImages.ANH_NEN7,
-              ),
-              itemTimer(
-                time.hours != null
-                    ? (time.hours < 10
-                        ? '0${time.hours}'
-                        : time.hours.toString())
-                    : '00',
-                'Giờ',
-                AppImages.ANH_NEN8,
-              ),
-              itemTimer(
-                time.min != null
-                    ? (time.min < 10 ? '0${time.min}' : time.min.toString())
-                    : '00',
-                'Phút',
-                AppImages.ANH_NEN7,
-              ),
-              itemTimer(
-                time.sec != null
-                    ? (time.sec < 10 ? '0${time.sec}' : time.sec.toString())
-                    : '00',
-                'Giây',
-                AppImages.ANH_NEN8,
-              ),
-            ],
-          );
-        },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CountdownTimer(
+            controller: controller,
+            widgetBuilder: (_, CurrentRemainingTime time) {
+              if (time == null) {
+                String day="";
+                if( DateTime.now().day == 1) {
+                  day = "Mùng 1 tết";
+                }
+                if( DateTime.now().day == 2) {
+                  day = "Mùng 2 tết";
+                }
+                if( DateTime.now().day == 3) {
+                  day = "Mùng 3 tết";
+                }
+                  return Text(
+                   day,// "Chúc Mừng Năm Mới",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w800,
+                      color: AppTheme.red,
+                    ),
+                  );
+              }
+              return Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      itemTimer(
+                        time.days != null
+                            ? (time.days < 10
+                                ? '0${time.days}'
+                                : time.days.toString())
+                            : '00',
+                        'Ngày',
+                        AppImages.ANH_NEN7,
+                      ),
+                      itemTimer(
+                        time.hours != null
+                            ? (time.hours < 10
+                                ? '0${time.hours}'
+                                : time.hours.toString())
+                            : '00',
+                        'Giờ',
+                        AppImages.ANH_NEN8,
+                      ),
+                      itemTimer(
+                        time.min != null
+                            ? (time.min < 10
+                                ? '0${time.min}'
+                                : time.min.toString())
+                            : '00',
+                        'Phút',
+                        AppImages.ANH_NEN7,
+                      ),
+                      itemTimer(
+                        time.sec != null
+                            ? (time.sec < 10
+                                ? '0${time.sec}'
+                                : time.sec.toString())
+                            : '00',
+                        'Giây',
+                        AppImages.ANH_NEN8,
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 16),
+                  time != null
+                      ? Text(
+                          "Đếm ngược đoàn viên",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w800,
+                            color: AppTheme.red,
+                          ),
+                        )
+                      : Container(),
+                ],
+              );
+            },
+          ),
+        ],
       ),
     );
   }

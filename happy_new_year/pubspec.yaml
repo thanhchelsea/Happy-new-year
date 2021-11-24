@@ -43,7 +43,7 @@ dependencies:
   dio: ^4.0.1
   flutter_spinkit: ^5.1.0
   auto_size_text: ^3.0.0
-#  polygon_clipper: ^1.0.2
+  flutter_polygon: ^0.3.0+2
   flip_card: ^0.6.0
   flutter_countdown_timer: ^4.1.0
   sqflite: ^2.0.0+4

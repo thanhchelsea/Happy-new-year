@@ -46,46 +46,52 @@ class DialogConfirmReportState extends State<DialogConfirmReport>
           return Center(
             child: Container(
               width: 300,
-              height: 0.9* DeviceUtil.getDeviceHeight(context),
+           //   height: 0.9* DeviceUtil.getDeviceHeight(context),
               //   color: Colors.white,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Stack(
-                    alignment: Alignment.center,
-                    children: <Widget>[
-                      Image(
-                        image: AssetImage(AppImages.ANH_NEN2),
-                        // fit: BoxFit.cover,
-                        alignment: Alignment.topCenter,
-                      ),
-                      Center(
-                        child: Container(
-                          // color: Colors.redAccent,
-                          width: 300,
-                          height: 0.7 * DeviceUtil.getDeviceHeight(context),
+                  Container(
+                  //  height: 500,
+                    color: Colors.teal,
+                    child: Stack(
+                      overflow: Overflow.visible,
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        Image(
+                          image: AssetImage(AppImages.ANH_NEN2),
+                          // fit: BoxFit.cover,
                           alignment: Alignment.topCenter,
-                          child: Image(
-                            image: AssetImage(AppImages.ANH_GIF5),
-                            // fit: BoxFit.cover,
-                            alignment: Alignment.center,
+                        ),
+                        Positioned(
+                          top: -200,
+                          child:  Center(
+                            child: Container(
+                               width: 300,
+                              alignment: Alignment.topCenter,
+                              child: Image(
+                                image: AssetImage(AppImages.ANH_GIF5),
+                                // fit: BoxFit.cover,
+                                alignment: Alignment.center,
+                              ),
+                            ),
+                          ),),
+                        Center(// var a=[1,2.3] ;
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                widget.money.toString() == "May mắn" ? widget.money.toString():widget.money.toString()+ " vnđ",
+                                style: AppTheme.headline,
+                              )
+                            ],
                           ),
                         ),
-                      ),
-                      Center(// var a=[1,2.3] ;
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              widget.money.toString()=="May mắn"?widget.money.toString():widget.money.toString()+ " vnđ",
-                              style: AppTheme.headline,
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                      ],
+                    ),
                   ),
+                  SizedBox(height: 30,),
                   FlatButton(
                     onPressed: (){
                       BlocProvider.of<LiXiBloc>(this.context).add(ResetLiXi(true));

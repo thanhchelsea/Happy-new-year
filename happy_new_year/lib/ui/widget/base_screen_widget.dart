@@ -12,14 +12,13 @@ class BaseScreen extends StatelessWidget {
   final Widget body;
   final Widget iconMenu;
   final Function menuMethod;
-  BaseScreen({
-    this.title,
-    this.iconMoreMenu,
-    this.iconBack,
-    this.body,
-    this.iconMenu,
-    this.menuMethod
-  });
+  BaseScreen(
+      {this.title,
+      this.iconMoreMenu,
+      this.iconBack,
+      this.body,
+      this.iconMenu,
+      this.menuMethod});
 
   Widget getAppBarUI(BuildContext context) {
     return Container(
@@ -54,20 +53,14 @@ class BaseScreen extends StatelessWidget {
                 child: Container(
                   color: Colors.transparent,
                   child: iconBack != null && iconBack
-                      ? InkWell(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(32.0),
-                          ),
-                          onTap: () {
+                      ? IconButton(
+                          onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 8),
-                            child: Icon(
-                              Icons.arrow_back,
-                              color: AppTheme.nearlyYellow,
-                              size: 30,
-                            ),
+                          icon: Icon(
+                            Icons.arrow_back,
+                            color: AppTheme.nearlyYellow,
+                            size: 30,
                           ),
                         )
                       : Container(),
@@ -103,7 +96,8 @@ class BaseScreen extends StatelessWidget {
                                 padding: EdgeInsets.all(2),
                                 decoration: BoxDecoration(
                                   color: AppTheme.nearlyYellow,
-                                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
                                 ),
                                 child: iconMenu,
                               ),

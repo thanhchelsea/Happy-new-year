@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,11 @@ import 'package:happy_new_year/utils/common.dart';
 import 'package:happy_new_year/utils/device.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:share/share.dart';
+
+import '../../routes.dart';
 
 class TaoThiepScreen extends StatelessWidget {
   @override
@@ -50,7 +55,7 @@ class _BodyThiepState extends State<BodyThiep> {
       final bytes1 = await Common.capture(key1);
       if (!(await Permission.storage.status.isGranted))
         await Permission.storage.request();
-     await ImageGallerySaver.saveImage(bytes1, quality: 80);
+      await ImageGallerySaver.saveImage(bytes1, quality: 80);
       showDemoDialog(context: context, isShowsaveimage: true);
     } catch (e) {
       print(e.toString());
@@ -61,12 +66,10 @@ class _BodyThiepState extends State<BodyThiep> {
     this.bytes1 = bytes1;
     try {
       final bytes1 = await Common.capture(key1);
-      // await Share.files(
-      //     'esys images',
-      //     {
-      //       'esys.png': bytes1.buffer.asUint8List(),
-      //     },
-      //     'image/png');
+      final tempDir = await getTemporaryDirectory();
+      final file = await new File('${tempDir.path}/image.jpg').create();
+      file.writeAsBytesSync(bytes1);
+      await Share.shareFiles(['${file.path}'], text: 'Chia sẻ');
     } catch (e) {
       print('error: $e');
     }
@@ -118,10 +121,11 @@ class _BodyThiepState extends State<BodyThiep> {
               }
             case 3:
               {
-                isThuVienThiep = true;
-                isLoiChuc = false;
-                isDoiNen = false;
-                isDoiKieuChu = false;
+                // isThuVienThiep = true;
+                // isLoiChuc = false;
+                // isDoiNen = false;
+                // isDoiKieuChu = false;
+                Navigator.pushNamed(context, Routes.loichuc);
                 break;
               }
             case 4:
@@ -161,7 +165,7 @@ class _BodyThiepState extends State<BodyThiep> {
     );
   }
 
-  void showDemoDialog({BuildContext context,bool isShowsaveimage}) {
+  void showDemoDialog({BuildContext context, bool isShowsaveimage}) {
     showDialog<dynamic>(
       context: context,
       builder: (BuildContext context) => DialogConfirmText(
@@ -263,88 +267,98 @@ class _BodyThiepState extends State<BodyThiep> {
         }
       },
       builder: (context, state) {
-        return Container(
-          color: AppTheme.black,
-          alignment: Alignment.center,
-          width: DeviceUtil.getDeviceWidth(context),
-          height: DeviceUtil.getDeviceHeight(context) - 70,
+        return GestureDetector(
+          onTap: () {
+            if (isShowSelection == true) {
+              setState(() {
+                isShowSelection = false;
+              });
+            }
+          },
           child: Container(
-            child: Stack(
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(top: 20, bottom: 20),
-                  alignment: Alignment.center,
-                  child: WidgetToImage(
-                    builder: (key) {
-                      this.key1 = key;
-                      return Stack(
-                        alignment: Alignment.center,
-                        children: <Widget>[
-                          Image(
-                            image: AssetImage(state.image),
-                          ),
-                          Positioned(
-                            left: position.dx, //right: position.dx,
-                            top: position.dy, //bottom: position.dy,
-                            child: GestureDetector(
-                              onPanUpdate: (details) {
-                                setState(() {
-                                  position = Offset(
-                                      position.dx + details.delta.dx,
-                                      position.dy + details.delta.dy);
-                                });
-                              },
-                              child: Container(
-                                child: Text(
-                                  state.loiChuc,
-                                  textAlign: TextAlign.center,
-                                  style: fontText,
-                                ),
-                                padding: EdgeInsets.all(10),
-                              ),
-                            ),
-                          )
-                        ],
-                      );
-                    },
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        isShowSelection
-                            ? ItemSelect(
-                                isLoiChuc: isLoiChuc,
-                                isDoiKieuChu: isDoiKieuChu,
-                                isDoiNen: isDoiNen,
-                                isThuVienThiep: isThuVienThiep,
-                              )
-                            : Container(),
-                        Container(
+            color: AppTheme.black,
+            alignment: Alignment.center,
+            width: DeviceUtil.getDeviceWidth(context),
+            height: DeviceUtil.getDeviceHeight(context) - 70,
+            child: Container(
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.only(top: 20, bottom: 20),
+                    alignment: Alignment.center,
+                    child: WidgetToImage(
+                      builder: (key) {
+                        this.key1 = key;
+                        return Stack(
                           alignment: Alignment.center,
-                          color: AppTheme.white,
-                          width: DeviceUtil.getDeviceWidth(context),
-                          height: (1 / 9) * DeviceUtil.getDeviceHeight(context),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: List.generate(
-                                6,
-                                (index) => item(listItem[index].title,
-                                    listItem[index].icon, index),
-                              ),
+                          children: <Widget>[
+                            Image(
+                              image: AssetImage(state.image),
                             ),
-                          ),
-                        ),
-                      ],
+                            Positioned(
+                              left: position.dx, //right: position.dx,
+                              top: position.dy, //bottom: position.dy,
+                              child: GestureDetector(
+                                onPanUpdate: (details) {
+                                  setState(() {
+                                    position = Offset(
+                                        position.dx + details.delta.dx,
+                                        position.dy + details.delta.dy);
+                                  });
+                                },
+                                child: Container(
+                                  child: Text(
+                                    state.loiChuc,
+                                    textAlign: TextAlign.center,
+                                    style: fontText,
+                                  ),
+                                  padding: EdgeInsets.all(10),
+                                ),
+                              ),
+                            )
+                          ],
+                        );
+                      },
                     ),
                   ),
-                )
-              ],
+                  Positioned(
+                    bottom: 0,
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          isShowSelection
+                              ? ItemSelect(
+                                  isLoiChuc: isLoiChuc,
+                                  isDoiKieuChu: isDoiKieuChu,
+                                  isDoiNen: isDoiNen,
+                                  isThuVienThiep: isThuVienThiep,
+                                )
+                              : Container(),
+                          Container(
+                            alignment: Alignment.center,
+                            color: AppTheme.white,
+                            width: DeviceUtil.getDeviceWidth(context),
+                            height:
+                                (1 / 9) * DeviceUtil.getDeviceHeight(context),
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: List.generate(
+                                  6,
+                                  (index) => item(listItem[index].title,
+                                      listItem[index].icon, index),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         );
@@ -394,7 +408,6 @@ class _ItemSelectState extends State<ItemSelect> {
     listImage.add(AppImages.THIEP9);
     listImage.add(AppImages.THIEP10);
     listImage.add(AppImages.ANH_NEN7);
-
 
     listColor.add(Color(0xfffdcb6e));
     listColor.add(Color(0xff2d3436));
@@ -586,7 +599,6 @@ class _ItemSelectState extends State<ItemSelect> {
                           Center(
                               child: Column(children: [
                             Container(
-//                            margin: EdgeInsets.only(bottom: 15),
                               child: Slider(
                                 value: valueHolder.toDouble(),
                                 min: 1,

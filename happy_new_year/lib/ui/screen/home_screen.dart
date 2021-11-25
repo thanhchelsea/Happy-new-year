@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     final random = new Random(); //7  9 8
     int i = random.nextInt(11);
-    if (i != 7 && i != 8 && i != 9 && i != 10 && i != 2 && i != 0 && i != 4) {
+    if (i != 7 && i != 8 && i != 9 && i != 10 && i != 2 && i != 0 && i != 4 && i !=6) {
       iamgeBacground = "assets/images/anhnen${i}.jpg";
     } else
       iamgeBacground = "assets/images/anhnen3.jpg";

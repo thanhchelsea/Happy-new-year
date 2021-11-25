@@ -10,6 +10,7 @@ import 'package:happy_new_year/res/resources.dart';
 import 'package:happy_new_year/routes.dart';
 import 'package:happy_new_year/ui/widget/widget.dart';
 import 'package:happy_new_year/utils/ultils.dart';
+import 'package:share/share.dart';
 
 class LoiChucDetailScreen extends StatefulWidget {
   const LoiChucDetailScreen({Key key, @required this.title}) : super(key: key);
@@ -23,7 +24,7 @@ class _LoiChucDetailScreenState extends State<LoiChucDetailScreen> {
 
   Future _shareMessage(String content) async {
     try {
-   //   Share.text('title', content, 'text/plain');
+      Share.share(content,subject: "Lời chúc");
     } catch (e) {
       print('error: $e');
     }

@@ -4,12 +4,12 @@ class AppImages {
   static const String ANH_NEN2 = "assets/images/anhnen2.jpg";
   static const String ANH_NEN3 = "assets/images/anhnen3.jpg";
   static const String ANH_NEN5 = "assets/images/anhnen5.jpg";
-  static const String ANH_NEN6 = "assets/images/anhnen6.jpg";
+  static const String ANH_NEN6 = "assets/images/anhnen1.jpg";
   static const String ANH_NEN7 = "assets/images/anhnen7.jpg";
   static const String ANH_NEN8 = "assets/images/anhnen8.jpg";
   static const String BACKGROUND_LIXI = "assets/images/anhnen10.jpg";
   static const String ANH_NEN12 = "assets/images/anhnen12.png";
-  static const String BACKGROUND_LOICHUC = "assets/images/anhnen6.jpg";
+  static const String BACKGROUND_LOICHUC = "assets/images/anhnen1.jpg";
 
   //anh appbar
   static const String APP_BAR = "assets/images/appbar.jpg";

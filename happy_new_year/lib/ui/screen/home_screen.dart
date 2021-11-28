@@ -17,17 +17,24 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-String iamgeBacground = "";
+String imageBackground = "";
 
 class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     final random = new Random(); //7  9 8
     int i = random.nextInt(11);
-    if (i != 7 && i != 8 && i != 9 && i != 10 && i != 2 && i != 0 && i != 4 && i !=6) {
-      iamgeBacground = "assets/images/anhnen${i}.jpg";
+    if (i != 7 &&
+        i != 8 &&
+        i != 9 &&
+        i != 10 &&
+        i != 2 &&
+        i != 0 &&
+        i != 4 &&
+        i != 6) {
+      imageBackground = "assets/images/anhnen${i}.jpg";
     } else
-      iamgeBacground = "assets/images/anhnen3.jpg";
+      imageBackground = "assets/images/anhnen3.jpg";
   }
 
   @override
@@ -39,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Stack(
           children: <Widget>[
             Image(
-              image: AssetImage(iamgeBacground),
+              image: AssetImage(imageBackground),
               fit: BoxFit.cover,
               height: DeviceUtil.getDeviceHeight(context),
               width: DeviceUtil.getDeviceWidth(context),
@@ -105,74 +112,82 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
-                            height: DeviceUtil.getDeviceHeight(context) / 5,
-                            width: DeviceUtil.getDeviceWidth(context),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                   padding: EdgeInsets.only(left: 16),
-                                  child: Text(
-                                    Language.of(context)
-                                        .getText("home.chuc_tet"),
-                                    style: AppTheme.headline,
-                                  ),
+                          padding: EdgeInsets.only(left: 16),
+                          child: Text(
+                            Language.of(context).getText("home.chuc_tet"),
+                            style: AppTheme.headline,
+                          ),
+                        ),
+                        Container(
+                          height: DeviceUtil.getDeviceHeight(context) / 5,
+                          width: DeviceUtil.getDeviceWidth(context),
+                          child: ListView(
+                            padding: EdgeInsets.only(top: 0),
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            children: <Widget>[
+                              Container(
+                                alignment: Alignment.center,
+                                child: ItemApp(
+                                  AppImages.ICON_THIEP_TET,
+                                  "home.tao_thiep",
+                                  method: () {
+                                    BlocProvider.of<TaoThiepBloc>(context)
+                                        .add(ChangeText(""));
+                                    Navigator.pushNamed(
+                                      context,
+                                      Routes.taothiep,
+                                    );
+                                  },
                                 ),
-                                Expanded(
-                                  child: ListView(
-                                    padding: EdgeInsets.only(top: 0),
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.horizontal,
-                                    children: <Widget>[
-                                      Container(
-                                        alignment: Alignment.center,
-                                        child: ItemApp(
-                                          AppImages.ICON_THIEP_TET,
-                                          "home.tao_thiep",
-                                          method: () {
-                                            BlocProvider.of<TaoThiepBloc>(
-                                                    context)
-                                                .add(ChangeText(""));
-                                            Navigator.pushNamed(
-                                              context,
-                                              Routes.taothiep,
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                      Container(
-                                        alignment: Alignment.center,
-                                        child: ItemApp(
-                                          AppImages.ICON_THIEP,
-                                          "home.loi_chuc_tet",
-                                          method: () {
-                                            Navigator.pushNamed(
-                                              context,
-                                              Routes.loichuc,
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                      // Container(
-                                      //   alignment: Alignment.center,
-                                      //   child: ItemApp(
-                                      //     AppImages.ICON_THU_VIEN_THIEP_TET,
-                                      //     "home.danh_sach_anh_thiep",
-                                      //     method: (){},
-                                      //   ),
-                                      // ),
-                                      Container(
-                                        alignment: Alignment.center,
-                                        child: ItemApp(
-                                          AppImages.ICON_THO_CUNG,
-                                          "home.van_khan_tet",
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                child: ItemApp(
+                                  AppImages.ICON_THIEP,
+                                  "home.loi_chuc_tet",
+                                  method: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      Routes.loichuc,
+                                    );
+                                  },
                                 ),
-                              ],
-                            )),
+                              ),
+                              Container(
+                                  alignment: Alignment.center,
+                                  child: ItemApp(
+                                      AppImages.ICON_THU_VIEN_THIEP_TET,
+                                      "home.danh_sach_anh_thiep")),
+                              Container(
+                                alignment: Alignment.center,
+                                child: ItemApp(
+                                  AppImages.ICON_THO_CUNG,
+                                  "home.van_khan_tet",
+                                  method: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      Routes.van_khan_screen,
+                                    );
+                                  },
+                                ),
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                child: ItemApp(
+                                  AppImages.ICON_THO_CUNG,
+                                  "home.sms_teen",
+                                  method: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      Routes.sms,
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -204,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     () {
                                   Navigator.pushNamed(
                                     context,
-                                    Routes.lixi,
+                                    Routes.cam_nang,
                                   );
                                 }),
                               ),

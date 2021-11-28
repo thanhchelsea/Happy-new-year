@@ -3,13 +3,14 @@
   "home": {
     "cam_nang_tet": "Cẩm nang tết",
     "loi_chuc_tet": "Lời chúc tết",
-    "tao_thiep": "Tạo thiệp chúc tết",
     "danh_sach_anh_thiep": "Thư viện thiệp tết",
     "chuc_tet": "Chúc tết",
     "van_khan_tet": "Văn khấn tết",
     "ngay_tet": "Ngày tết",
     "li_xi": "Lì xì",
-    "tao_thiep": "Tạo Thiệp"
+    "tao_thiep": "Tạo Thiệp",
+    "sms_teen": "Tin nhắn hình",
+    "van_khan" : "Văn Khấn"
   },
 
   "li_xi": {
@@ -51,6 +52,36 @@
     "chuc_tet_co_di_chu_bac": "Chúc tết cô, dì, chú, bác",
     "chuc_tet_thay_co": "Chúc tết thầy cô",
     "chuc_tet_vo_chong": "Chúc tết người yêu, vợ chồng",
-    "chuc_tet_sep": "Chúc tết sếp"
+    "chuc_tet_sep": "Chúc tết sếp",
+    "wish": "Lời chúc",
+    "poem": "Thơ - Câu đố",
+    "english": "Tiếng Anh",
+    "doc": "Độc",
+    "family": "Gia đình",
+    "friend": "Bạn bè",
+    "co_worker": "Đồng nghiệp",
+    "lover": "Người yêu"
+  },
+  "cam_nang" : {
+    "title": "Cẩm nang Tết",
+    "tradition": "Phong tục Tết",
+    "good_thing": "Điều lành ngày Tết",
+    "taboo": "Điều cấm kỵ ngày Tết",
+    "delicious_food": "Món ngon ngày Tết",
+    "tips": "Mẹo vặt ngày Tết"
+  },
+  "van_khan" : {
+    "rule": "Nguyên tắc Cúng, Khấn, Vái, Lạy",
+    "van_khan_tet": "Văn Khấn Tết Nguyên Đán",
+    "van_khan_tiet_trong_nam": "Văn khấn các tiết trong năm",
+    "van_khan_m1_va_ram": "Văn khấn mồng Một và ngày Rằm",
+    "van_khan_le_tuc_vong_doi": "Van khấn nghi lễ của Lễ tục vòng đời",
+    "van_khan_dang_sao_giai_han": "Văn kh dâng sao giải hạn",
+    "van_khan_tang_le": "Văn khấn trong tang lễ",
+    "van_khan_cung_gio": "Văn khấn trong cúng giỗ",
+    "van_khan_than_linh_tại_gia": "Văn khấn thần linh tại gia",
+    "van_khan_tai_chua": "Văn khấn tại Chùa",
+    "van_khan_tai_dinh_den_mieu_phu": "Văn khấn cúng lễ tại Đình, Đền, Miếu, Phủ"
+
   }
 }

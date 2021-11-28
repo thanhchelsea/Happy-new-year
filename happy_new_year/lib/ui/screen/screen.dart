@@ -3,3 +3,8 @@ export 'li_xi.dart';
 export 'tao_thiep_screen.dart';
 export 'loi_chuc_screen.dart';
 export 'loi_chuc_detail_screen.dart';
+export 'cam_nang_screen.dart';
+export 'cam_nang_detail_screen.dart';
+export 'sms_screen.dart';
+export 'van_khan_screen.dart';
+export 'van_khan_detail_screen.dart';

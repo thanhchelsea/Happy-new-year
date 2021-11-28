@@ -13,7 +13,7 @@ class ItemApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        method();
+        if (method != null) method();
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

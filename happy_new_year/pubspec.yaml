@@ -52,6 +52,7 @@ dependencies:
   google_fonts: ^2.1.0
   image_gallery_saver: ^1.7.1
   permission_handler: ^8.1.6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -81,6 +82,7 @@ flutter:
     - assets/image_gif/
     - assets/thieptet/
     - assets/happy_new_year.db
+    - assets/countdown_database.sqlite
   fonts:
     - family: WorkSans
       fonts:

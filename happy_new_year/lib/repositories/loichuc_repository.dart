@@ -5,7 +5,7 @@ import 'package:happy_new_year/services/database.dart';
 class LoiChucRepository {
   DatabaseProvider databaseProvider = locator<DatabaseProvider>();
 
-  Future<List<LoiChuc>> getLoiCHucs(String topic) async {
-    return await databaseProvider.getLoiChucs(topic);
+  Future<List<LoiChucModel>> getLoiCHucs(int groupId) async {
+    return await databaseProvider.getLoiChucs(groupId);
   }
 }

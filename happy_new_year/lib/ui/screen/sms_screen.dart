@@ -1,38 +1,55 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:happy_new_year/blocs/blocs.dart';
 import 'package:happy_new_year/data/model/model.dart';
 import 'package:happy_new_year/res/resources.dart';
-import 'package:happy_new_year/routes.dart';
 import 'package:happy_new_year/ui/widget/widget.dart';
-import 'package:share/share.dart';
 import 'package:happy_new_year/utils/utils.dart';
 
-class LoiChucDetailScreen extends StatefulWidget {
-  const LoiChucDetailScreen(
-      {Key key, @required this.groupId, @required this.content})
-      : super(key: key);
-  final int groupId;
-  final String content;
+import '../../locator.dart';
+import '../../routes.dart';
 
-  @override
-  _LoiChucDetailScreenState createState() => _LoiChucDetailScreenState();
-}
+class SMSScreen extends StatelessWidget {
+  const SMSScreen({Key key}) : super(key: key);
 
-class _LoiChucDetailScreenState extends State<LoiChucDetailScreen> {
   Future _shareMessage(String content) async {
     try {
       //   Share.text('title', content, 'text/plain');
-      Share.share(content,subject: "Lời chúc");
     } catch (e) {
       print('error: $e');
     }
   }
 
-  Widget bodyLoiChucDetail(BuildContext context, List<LoiChucModel> list) {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<SMSBloc>(
+      create: (context) => SMSBloc(locator())..add(GetSMS()),
+      child: BaseScreen(
+        title: 'home.sms_teen',
+        iconBack: true,
+        body: BlocBuilder<SMSBloc, SMSState>(
+          builder: (context, state) {
+            print(state.listOfSMS);
+            if (state is SMSLoadInProgress) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is SMSLoadSuccess) {
+              return bodySMSDetail(context, state.listOfSMS);
+            }
+            return Center(
+              child: Text('Fail to Load'),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget bodySMSDetail(BuildContext context, List<SMSTeenModel> list) {
     return Container(
       width: DeviceUtil.getDeviceWidth(context),
       height: DeviceUtil.getDeviceHeight(context),
@@ -50,7 +67,7 @@ class _LoiChucDetailScreenState extends State<LoiChucDetailScreen> {
             child: ListView.builder(
               itemCount: list.length,
               itemBuilder: (context, index) {
-                return itemLoiChuc(context, list, index);
+                return itemSMS(context, list, index);
               },
             ),
           )
@@ -59,10 +76,8 @@ class _LoiChucDetailScreenState extends State<LoiChucDetailScreen> {
     );
   }
 
-  Widget itemLoiChuc(
-      BuildContext context, List<LoiChucModel> list, int currentIndex) {
-    //final Codec<String, String> stringToBase64 = utf8.fuse(base64);
-    final String content = list[currentIndex].content;
+  Widget itemSMS(BuildContext context, List<SMSTeenModel> list, int currentIndex) {
+    final String content = list[currentIndex].info;
     print(list[currentIndex]);
     return InkWell(
       onTap: () {
@@ -146,7 +161,9 @@ class _LoiChucDetailScreenState extends State<LoiChucDetailScreen> {
                             BlocProvider.of<TaoThiepBloc>(context)
                                 .add(ChangeText(content));
                             DialogUtil.showSaveEdit(
-                                context: context, index: currentIndex);
+                              context: context,
+                              index: currentIndex,
+                            );
                           }),
                         ],
                       ),
@@ -182,41 +199,6 @@ class _LoiChucDetailScreenState extends State<LoiChucDetailScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  @override
-  void initState() {
-    BlocProvider.of<LoiChucBloc>(context)
-        .add(LoiChucFetched(groupId: widget.groupId));
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BaseScreen(
-      title: 'loi_chuc.${widget.content}',
-      iconBack: true,
-      body: BlocBuilder<LoiChucBloc, LoiChucState>(
-        builder: (context, state) {
-          // if (state is LoiChucInitial) {
-          //   return Center(
-          //     child: Text('Loi Chuc'),
-          //   );
-          // }
-          if (state is LoiChucLoadInProgress) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is LoiChucLoadSuccess) {
-            return bodyLoiChucDetail(context, state.list);
-          }
-          return Center(
-            child: Text('Fail to Load'),
-          );
-        },
       ),
     );
   }

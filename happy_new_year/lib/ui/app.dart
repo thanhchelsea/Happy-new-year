@@ -3,10 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:happy_new_year/data/model/model.dart';
 import 'package:happy_new_year/res/resources.dart';
 import 'package:happy_new_year/routes.dart';
 import 'package:happy_new_year/ui/screen/screen.dart';
-import 'package:happy_new_year/utils/ultils.dart';
+import 'package:happy_new_year/utils/utils.dart';
 import '../constants.dart';
 import '../localizations.dart';
 
@@ -45,9 +46,22 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.initScreen(),
       onGenerateRoute: (settings) {
         if (settings.name == Routes.loi_chuc_detail) {
-          String arg = settings.arguments;
+          final arg = settings.arguments as GroupModel;
           return MaterialPageRoute(
-            builder: (_) => LoiChucDetailScreen(title: arg,),
+            builder: (_) => LoiChucDetailScreen(groupId: arg.id, content: arg.title,),
+          );
+        }
+
+        if (settings.name == Routes.cam_nang_detail) {
+          final arg = settings.arguments as GroupModel;
+          return MaterialPageRoute(
+            builder: (_) => CamNangDetailScreen(groupId: arg.id, content: arg.title,),
+          );
+        }
+        if(settings.name == Routes.van_khan_detail) {
+          final arg = settings.arguments as GroupModel;
+          return MaterialPageRoute(
+            builder: (_) => VanKhanDetailScreen(groupModel: arg,),
           );
         }
         return null;

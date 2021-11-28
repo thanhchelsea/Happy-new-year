@@ -6,9 +6,12 @@ import 'package:happy_new_year/data/model/model.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
-const String DB_NAME = "happy_new_year.db";
-const String DB_NAME_CP = "happy_new_year_cp.db";
-const String TABLE_LOICHUC = 'LOICHUC';
+const String DB_NAME = "countdown_database.sqlite";
+const String DB_NAME_CP = "countdown_database_cp.sqlite";
+const String TABLE_LOICHUC = 'CAUCHUC';
+const String TABLE_CAMNAMG = 'CAMNANG';
+const String TABLE_SMS = 'SMSTEEN';
+const String TABLE_VANKHAN = 'VANKHANTET';
 
 class DatabaseProvider {
   static final DatabaseProvider databaseProvider = DatabaseProvider._();
@@ -17,8 +20,7 @@ class DatabaseProvider {
   DatabaseProvider._();
 
   Future<Database> get database async {
-    if (_database != null)
-      return _database;
+    if (_database != null) return _database;
     _database = await initDB();
     return _database;
   }
@@ -30,16 +32,16 @@ class DatabaseProvider {
     var exists = await databaseExists(path);
 
     if (!exists) {
-      print ('Creating new copy from assets');
+      print('Creating new copy from assets');
 
       try {
         await Directory(dirname(path)).create(recursive: true);
       } catch (_) {}
 
       // Copy from asset
-      ByteData data = await rootBundle.load(join("assets", "happy_new_year.db"));
+      ByteData data = await rootBundle.load(join("assets", DB_NAME));
       List<int> bytes =
-      data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+          data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
 
       // Write and flush the bytes written
       await File(path).writeAsBytes(bytes, flush: true);
@@ -55,13 +57,33 @@ class DatabaseProvider {
   }
 
   Future deleteDB() async {
-    return deleteDatabase(join(await getDatabasesPath(),DB_NAME_CP));
+    return deleteDatabase(join(await getDatabasesPath(), DB_NAME_CP));
   }
 
-  Future<List<LoiChuc>> getLoiChucs(String topic) async {
+  Future<List<LoiChucModel>> getLoiChucs(int groupId) async {
     final db = await database;
-    List<Map<String, dynamic>> maps = await db.query(TABLE_LOICHUC, where: 'ROLE = ?', whereArgs: [topic]);
-    print(maps);
-    return maps.map((e) => LoiChuc.fromJson(e)).toList();
+    List<Map<String, dynamic>> maps =
+        await db.query(TABLE_LOICHUC, where: 'Nhom = ?', whereArgs: [groupId]);
+    return maps.map((e) => LoiChucModel.fromJson(e)).toList();
+  }
+
+  Future<List<CamNangModel>> getCamNang(int groupId) async {
+    final db = await database;
+    List<Map<String, dynamic>> maps =
+        await db.query(TABLE_CAMNAMG, where: 'Nhom = ?', whereArgs: [groupId]);
+    return maps.map((e) => CamNangModel.fromJson(e)).toList();
+  }
+
+  Future<List<SMSTeenModel>> getSMS() async {
+    final db = await database;
+    List<Map<String, dynamic>> maps = await db.query(TABLE_SMS);
+    return maps.map((e) => SMSTeenModel.fromJson(e)).toList();
+  }
+
+  Future<List<VanKhanModel>> getVanKhan(int groupId) async {
+    final db = await database;
+    List<Map<String, dynamic>> maps =
+    await db.query(TABLE_VANKHAN, where: 'Nhom = ?', whereArgs: [groupId]);
+    return maps.map((e) => VanKhanModel.fromJson(e)).toList();
   }
 }

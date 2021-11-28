@@ -5,7 +5,7 @@ import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 
 import '../../res/colors.dart';
 import '../../res/resources.dart';
-import '../../utils/ultils.dart';
+import '../../utils/utils.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 
 class Countdown extends StatefulWidget {

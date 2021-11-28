@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:happy_new_year/blocs/blocs.dart';
 import 'package:happy_new_year/localizations.dart';
 import 'package:happy_new_year/res/resources.dart';
-import 'package:happy_new_year/utils/ultils.dart';
+import 'package:happy_new_year/utils/utils.dart';
 
 class DialogAddMoney extends StatefulWidget {
   const DialogAddMoney({

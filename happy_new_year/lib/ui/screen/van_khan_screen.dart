@@ -8,12 +8,11 @@ import 'package:happy_new_year/routes.dart';
 import 'package:happy_new_year/ui/widget/widget.dart';
 import 'package:happy_new_year/utils/utils.dart';
 
-class LoiChucScreen extends StatelessWidget {
-  Widget ItemLoiChuc(BuildContext context, GroupModel group) {
+class VanKhanScreen extends StatelessWidget {
+  Widget ItemVanKhan(BuildContext context, GroupModel group) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, Routes.loi_chuc_detail,
-            arguments: group);
+        Navigator.pushNamed(context, Routes.van_khan_detail, arguments: group);
       },
       child: Stack(
         alignment: Alignment.center,
@@ -33,7 +32,7 @@ class LoiChucScreen extends StatelessWidget {
             width: DeviceUtil.getDeviceWidth(context) / 2 - 40,
             alignment: Alignment.center,
             child: AutoSizeText(
-              Language.of(context).getText('loi_chuc.${group.title}'),
+              Language.of(context).getText('van_khan.${group.title}'),
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
@@ -50,38 +49,37 @@ class LoiChucScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double itemHeight = (DeviceUtil.getDeviceHeight(context)) / 2;
-    final double itemWidth = DeviceUtil.getDeviceWidth(context) / 1.7;
     return BaseScreen(
-        title: 'loi_chuc.title',
-        iconBack: true,
-        body: Container(
-          height: DeviceUtil.getDeviceHeight(context),
-          width: DeviceUtil.getDeviceWidth(context),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Image(
-                image: AssetImage(AppImages.BACKGROUND_LOICHUC),
-                fit: BoxFit.fill,
-                height: DeviceUtil.getDeviceHeight(context),
-                width: DeviceUtil.getDeviceWidth(context),
-                alignment: Alignment.center,
-              ),
-              Center(
-                child: GridView.builder(
-                  itemCount: Constants.wishGroups.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 2,
-                  ),
-                  itemBuilder: (context, index) {
-                    return ItemLoiChuc(context, Constants.wishGroups[index]);
-                  },
+      title: 'home.van_khan',
+      iconBack: true,
+      body: Container(
+        height: DeviceUtil.getDeviceHeight(context),
+        width: DeviceUtil.getDeviceWidth(context),
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Image(
+              image: AssetImage(AppImages.BACKGROUND_LOICHUC),
+              fit: BoxFit.fill,
+              height: DeviceUtil.getDeviceHeight(context),
+              width: DeviceUtil.getDeviceWidth(context),
+              alignment: Alignment.center,
+            ),
+            Center(
+              child: GridView.builder(
+                itemCount: Constants.vanKhanGroups.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 2,
                 ),
-              )
-            ],
-          ),
-        ));
+                itemBuilder: (context, index) {
+                  return ItemVanKhan(context, Constants.vanKhanGroups[index]);
+                },
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

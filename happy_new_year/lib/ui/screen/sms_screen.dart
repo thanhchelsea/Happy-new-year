@@ -7,6 +7,7 @@ import 'package:happy_new_year/data/model/model.dart';
 import 'package:happy_new_year/res/resources.dart';
 import 'package:happy_new_year/ui/widget/widget.dart';
 import 'package:happy_new_year/utils/utils.dart';
+import 'package:share/share.dart';
 
 import '../../locator.dart';
 import '../../routes.dart';
@@ -16,7 +17,12 @@ class SMSScreen extends StatelessWidget {
 
   Future _shareMessage(String content) async {
     try {
-      //   Share.text('title', content, 'text/plain');
+      try {
+        //   Share.text('title', content, 'text/plain');
+        Share.share(content, subject: "Lời chúc");
+      } catch (e) {
+        print('error: $e');
+      }
     } catch (e) {
       print('error: $e');
     }

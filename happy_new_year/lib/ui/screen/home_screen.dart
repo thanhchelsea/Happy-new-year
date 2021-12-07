@@ -155,11 +155,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               Container(
-                                  alignment: Alignment.center,
-                                  child: ItemApp(
-                                      AppImages.ICON_THU_VIEN_THIEP_TET,
-                                      "home.danh_sach_anh_thiep")),
-                              Container(
                                 alignment: Alignment.center,
                                 child: ItemApp(
                                   AppImages.ICON_THO_CUNG,
@@ -175,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Container(
                                 alignment: Alignment.center,
                                 child: ItemApp(
-                                  AppImages.ICON_THO_CUNG,
+                                  AppImages.ICON_SMS,
                                   "home.sms_teen",
                                   method: () {
                                     Navigator.pushNamed(
@@ -198,13 +193,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        // Container(
-                        //   padding: EdgeInsets.only(left: 16),
-                        //   child: Text(
-                        //     Language.of(context).getText("home.ngay_tet"),
-                        //     style: AppTheme.headline,
-                        //   ),
-                        // ),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 16),
                           width: DeviceUtil.getDeviceWidth(context),
@@ -226,12 +214,16 @@ class _HomeScreenState extends State<HomeScreen> {
                               SizedBox(width: 16),
                               Expanded(
                                 child: ItemAppNgayTet(
-                                    "home.li_xi", AppImages.ANH_NEN8, () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    Routes.lixi,
-                                  );
-                                }),
+                                  "home.li_xi",
+                                  AppImages.ANH_NEN8,
+                                  () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      Routes.lixi,
+                                    );
+                                  },
+
+                                ),
                               ),
                             ],
                           ),

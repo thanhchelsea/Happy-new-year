@@ -20,7 +20,7 @@ class ItemApp extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.all(12),
             margin: EdgeInsets.only(left: 8, right: 8),
             decoration: ShapeDecoration(
               shadows: [

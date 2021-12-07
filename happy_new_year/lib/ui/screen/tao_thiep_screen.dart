@@ -14,6 +14,7 @@ import 'package:happy_new_year/ui/widget/widget_to_image.dart';
 import 'package:happy_new_year/utils/common.dart';
 import 'package:happy_new_year/utils/device.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -313,6 +314,9 @@ class _BodyThiepState extends State<BodyThiep> {
                                     style: fontText,
                                   ),
                                   padding: EdgeInsets.all(10),
+                                  constraints: BoxConstraints(
+                                    maxWidth: DeviceUtil.getDeviceWidth(context)*0.9
+                                  ),
                                 ),
                               ),
                             )

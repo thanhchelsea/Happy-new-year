@@ -23,10 +23,10 @@ class LoiChucDetailScreen extends StatefulWidget {
 }
 
 class _LoiChucDetailScreenState extends State<LoiChucDetailScreen> {
-  Future _shareMessage(String content) async {
+   _shareMessage(String content) async {
     try {
       //   Share.text('title', content, 'text/plain');
-      Share.share(content,subject: "Lời chúc");
+      Share.share(content, subject: "Lời chúc");
     } catch (e) {
       print('error: $e');
     }
@@ -129,25 +129,35 @@ class _LoiChucDetailScreenState extends State<LoiChucDetailScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           itemControl(
-                              Icons.question_answer_outlined, 'Gửi tin nhắn',
-                              () {
-                            _shareMessage(content);
-                          }),
-                          itemControl(Icons.copy_outlined, 'Sao chép', () {
-                            Clipboard.setData(ClipboardData(text: content))
-                                .then((value) {
-                              final snackBar = SnackBar(
-                                content: Text('Copied to Clipboard'),
-                              );
-                              Scaffold.of(context).showSnackBar(snackBar);
-                            });
-                          }),
-                          itemControl(Icons.edit_outlined, 'Chỉnh sửa', () {
-                            BlocProvider.of<TaoThiepBloc>(context)
-                                .add(ChangeText(content));
-                            DialogUtil.showSaveEdit(
-                                context: context, index: currentIndex);
-                          }),
+                            Icons.question_answer_outlined,
+                            'Gửi tin nhắn',
+                            () {
+                              _shareMessage(content);
+                            },
+                          ),
+                          itemControl(
+                            Icons.copy_outlined,
+                            'Sao chép',
+                            () {
+                              Clipboard.setData(ClipboardData(text: content))
+                                  .then((value) {
+                                final snackBar = SnackBar(
+                                  content: Text('Copied to Clipboard'),
+                                );
+                                Scaffold.of(context).showSnackBar(snackBar);
+                              });
+                            },
+                          ),
+                          itemControl(
+                            Icons.edit_outlined,
+                            'Chỉnh sửa',
+                            () {
+                              BlocProvider.of<TaoThiepBloc>(context)
+                                  .add(ChangeText(content));
+                              DialogUtil.showSaveEdit(
+                                  context: context, index: currentIndex);
+                            },
+                          ),
                         ],
                       ),
                     ),

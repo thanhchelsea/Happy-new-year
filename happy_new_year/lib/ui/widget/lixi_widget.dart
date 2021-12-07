@@ -50,7 +50,8 @@ class _LixiItemState extends State<LiXiItem> {
                         ),
                         child: Image(
                           image: AssetImage(AppImages.ICON_LIXI),
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fitHeight,
+                          height: 200,
                         ),
                       ),
                     ),

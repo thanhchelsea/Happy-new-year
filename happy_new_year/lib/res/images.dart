@@ -30,6 +30,11 @@ class AppImages {
   static const String ICON_LIXI = "assets/image_icon/lixi.jpg";
   static const String ICON_LIXI2 = "assets/image_icon/lixi2.jpg";
   static const String ICON_DIALOG_LIXI = "assets/image_icon/icondialoglixi.png";
+    static const String ICON_MOENY = "assets/image_icon/icon_money.png";
+    static const String ICON_TET = "assets/image_icon/icon_tet.png";
+    static const String ICON_GIADINH_LIXI = "assets/image_icon/giadinh_lixi.jpeg";
+
+
 
   //anh thei
   static const String THIEP1 = "assets/thieptet/thiep1.png";

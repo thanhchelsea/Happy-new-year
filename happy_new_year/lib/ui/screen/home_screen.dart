@@ -203,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: <Widget>[
                               Expanded(
                                 child: ItemAppNgayTet(
-                                    "home.cam_nang_tet", AppImages.ANH_NEN7,
+                                    "home.cam_nang_tet", AppImages.ICON_TET,
                                     () {
                                   Navigator.pushNamed(
                                     context,
@@ -211,11 +211,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                   );
                                 }),
                               ),
-                              SizedBox(width: 16),
+                             // SizedBox(width: 16),
                               Expanded(
                                 child: ItemAppNgayTet(
                                   "home.li_xi",
-                                  AppImages.ANH_NEN8,
+                                  AppImages.ICON_GIADINH_LIXI,
                                   () {
                                     Navigator.pushNamed(
                                       context,

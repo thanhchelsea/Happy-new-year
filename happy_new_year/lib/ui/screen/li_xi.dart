@@ -13,7 +13,7 @@ class LiXiScreen extends StatefulWidget {
 }
 
 class _LiXiScreenState extends State<LiXiScreen> {
-  void showDemoDialog({BuildContext context,state}) {
+  void showDemoDialog({BuildContext context, state}) {
     showDialog<dynamic>(
       context: context,
       builder: (BuildContext context) => DialogAddMoney(
@@ -22,20 +22,28 @@ class _LiXiScreenState extends State<LiXiScreen> {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return BaseScreen(
       iconBack: true,
       title: "home.li_xi",
-      iconMenu: Icon(Icons.monetization_on,color: AppTheme.nearlyDarkBrown,size: 30,),
-      menuMethod:(){showDemoDialog(context:context);},
+      //iconMenu: Icon(Icons.monetization_on,color: AppTheme.nearlyDarkBrown,size: 30,),
+      iconMenu: Image(
+        image: AssetImage(AppImages.ICON_MOENY),
+        width: 30,
+        height: 30,
+      ),
+      menuMethod: () {
+        showDemoDialog(context: context);
+      },
       body: Lixi(),
     );
   }
 }
 
 class Lixi extends StatelessWidget {
-  void showDemoDialog({BuildContext context,state}) {
+  void showDemoDialog({BuildContext context, state}) {
     showDialog<dynamic>(
       context: context,
       builder: (BuildContext context) => DialogAddMoney(
@@ -44,6 +52,7 @@ class Lixi extends StatelessWidget {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     final orientation = MediaQuery.of(context).orientation;
@@ -67,32 +76,50 @@ class Lixi extends StatelessWidget {
               ),
               Center(
                 // width: 100,height: 100,
-                child: state.tien.isNotEmpty ?GridView.builder(
-                  shrinkWrap: true,
-                  itemCount: state.tien.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount:
-                    (orientation == Orientation.portrait) ? 3 : 4,
-                    childAspectRatio: (itemWidth / itemHeight),
-                  ),
-                  itemBuilder: (context, index) {
-                    return LiXiItem(i: index);
-                  },
-                ):
-                InkWell(
-                  onTap: (){
-                    showDemoDialog(context:context);
-                  },
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Icon(Icons.add,color: AppTheme.nearlyYellow,size: 25,),
-                        Text("Lựa chọn mệnh giá lì xì",style: AppTheme.title,),
-                      ],
-                    ),
-                  ),
-                ),
+                child: state.tien.isNotEmpty
+                    ? GridView.builder(
+                        shrinkWrap: true,
+                        itemCount: state.tien.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount:
+                              (orientation == Orientation.portrait) ? 3 : 4,
+                          childAspectRatio: (itemWidth / itemHeight),
+                        ),
+                        itemBuilder: (context, index) {
+                          return LiXiItem(i: index);
+                        },
+                      )
+                    : InkWell(
+                        onTap: () {
+                          showDemoDialog(context: context);
+                        },
+                        child: Container(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.add,
+                                    color: AppTheme.nearlyYellow,
+                                    size: 25,
+                                  ),
+                                  Image(
+                                    image: AssetImage(AppImages.ICON_MOENY),
+                                    width: 30,
+                                    height: 30,
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                "Lựa chọn mệnh giá lì xì",
+                                style: AppTheme.title,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
               ),
             ],
           ),
@@ -100,5 +127,4 @@ class Lixi extends StatelessWidget {
       },
     );
   }
-
 }

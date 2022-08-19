@@ -69,7 +69,7 @@ class Lixi extends StatelessWidget {
             children: <Widget>[
               Image(
                 image: AssetImage(AppImages.BACKGROUND_LIXI),
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
                 height: DeviceUtil.getDeviceHeight(context),
                 width: DeviceUtil.getDeviceWidth(context),
                 alignment: Alignment.center,
@@ -81,8 +81,7 @@ class Lixi extends StatelessWidget {
                         shrinkWrap: true,
                         itemCount: state.tien.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount:
-                              (orientation == Orientation.portrait) ? 3 : 4,
+                          crossAxisCount: (orientation == Orientation.portrait) ? 3 : 4,
                           childAspectRatio: (itemWidth / itemHeight),
                         ),
                         itemBuilder: (context, index) {

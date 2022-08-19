@@ -60,7 +60,7 @@ class VanKhanScreen extends StatelessWidget {
           children: [
             Image(
               image: AssetImage(AppImages.BACKGROUND_LOICHUC),
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
               height: DeviceUtil.getDeviceHeight(context),
               width: DeviceUtil.getDeviceWidth(context),
               alignment: Alignment.center,

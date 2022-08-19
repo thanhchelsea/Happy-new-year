@@ -12,9 +12,7 @@ import 'package:share/share.dart';
 import 'package:happy_new_year/utils/utils.dart';
 
 class LoiChucDetailScreen extends StatefulWidget {
-  const LoiChucDetailScreen(
-      {Key key, @required this.groupId, @required this.content})
-      : super(key: key);
+  const LoiChucDetailScreen({Key key, @required this.groupId, @required this.content}) : super(key: key);
   final int groupId;
   final String content;
 
@@ -23,7 +21,7 @@ class LoiChucDetailScreen extends StatefulWidget {
 }
 
 class _LoiChucDetailScreenState extends State<LoiChucDetailScreen> {
-   _shareMessage(String content) async {
+  _shareMessage(String content) async {
     try {
       //   Share.text('title', content, 'text/plain');
       Share.share(content, subject: "Lời chúc");
@@ -59,8 +57,7 @@ class _LoiChucDetailScreenState extends State<LoiChucDetailScreen> {
     );
   }
 
-  Widget itemLoiChuc(
-      BuildContext context, List<LoiChucModel> list, int currentIndex) {
+  Widget itemLoiChuc(BuildContext context, List<LoiChucModel> list, int currentIndex) {
     //final Codec<String, String> stringToBase64 = utf8.fuse(base64);
     final String content = list[currentIndex].content;
     print(list[currentIndex]);
@@ -107,8 +104,7 @@ class _LoiChucDetailScreenState extends State<LoiChucDetailScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                    top: 16, bottom: 4, left: 16, right: 16),
+                padding: const EdgeInsets.only(top: 16, bottom: 4, left: 16, right: 16),
                 child: Column(
                   children: [
                     AutoSizeText(
@@ -139,10 +135,9 @@ class _LoiChucDetailScreenState extends State<LoiChucDetailScreen> {
                             Icons.copy_outlined,
                             'Sao chép',
                             () {
-                              Clipboard.setData(ClipboardData(text: content))
-                                  .then((value) {
+                              Clipboard.setData(ClipboardData(text: content)).then((value) {
                                 final snackBar = SnackBar(
-                                  content: Text('Copied to Clipboard'),
+                                  content: Text('Đã sao chép'),
                                 );
                                 Scaffold.of(context).showSnackBar(snackBar);
                               });
@@ -152,10 +147,8 @@ class _LoiChucDetailScreenState extends State<LoiChucDetailScreen> {
                             Icons.edit_outlined,
                             'Chỉnh sửa',
                             () {
-                              BlocProvider.of<TaoThiepBloc>(context)
-                                  .add(ChangeText(content));
-                              DialogUtil.showSaveEdit(
-                                  context: context, index: currentIndex);
+                              BlocProvider.of<TaoThiepBloc>(context).add(ChangeText(content));
+                              DialogUtil.showSaveEdit(context: context, index: currentIndex);
                             },
                           ),
                         ],
@@ -198,8 +191,7 @@ class _LoiChucDetailScreenState extends State<LoiChucDetailScreen> {
 
   @override
   void initState() {
-    BlocProvider.of<LoiChucBloc>(context)
-        .add(LoiChucFetched(groupId: widget.groupId));
+    BlocProvider.of<LoiChucBloc>(context).add(LoiChucFetched(groupId: widget.groupId));
     super.initState();
   }
 

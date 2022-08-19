@@ -10,15 +10,13 @@ import 'package:path/path.dart';
 import '../../locator.dart';
 
 class VanKhanDetailScreen extends StatelessWidget {
-  const VanKhanDetailScreen({Key key, @required this.groupModel})
-      : super(key: key);
+  const VanKhanDetailScreen({Key key, @required this.groupModel}) : super(key: key);
   final GroupModel groupModel;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<VanKhanBloc>(
-      create: (context) =>
-          VanKhanBloc(locator())..add(VanKhanFetched(groupId: groupModel.id)),
+      create: (context) => VanKhanBloc(locator())..add(VanKhanFetched(groupId: groupModel.id)),
       child: BaseScreen(
         title: 'home.van_khan',
         iconBack: true,
@@ -81,16 +79,22 @@ class VanKhanDetailScreen extends StatelessWidget {
         width: double.maxFinite,
         child: Column(
           children: [
-            Text(vanKhan.groupName,
-            style: TextStyle(fontSize: 18, color: AppTheme.nearlyYellow),),
-            const SizedBox(height: 16,),
+            Text(
+              vanKhan.groupName,
+              style: TextStyle(fontSize: 18, color: AppTheme.nearlyYellow),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
             SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   _vanKhanSection('Ý nghĩa', vanKhan.meaning),
+                  SizedBox(height: 16),
                   _vanKhanSection('Sắm lễ', vanKhan.samle),
+                  SizedBox(height: 16),
                   _vanKhanSection('Văn khấn', vanKhan.vankhan),
                 ],
               ),
@@ -110,12 +114,11 @@ class VanKhanDetailScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
+            decoration: TextDecoration.underline,
             color: AppTheme.nearlyYellow,
           ),
         ),
-        SizedBox(
-          height: 16,
-        ),
+        SizedBox(height: 16),
         Text(
           content,
           style: TextStyle(

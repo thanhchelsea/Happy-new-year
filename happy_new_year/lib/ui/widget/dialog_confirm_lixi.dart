@@ -19,8 +19,7 @@ class DialogConfirmReport extends StatefulWidget {
   DialogConfirmReportState createState() => DialogConfirmReportState();
 }
 
-class DialogConfirmReportState extends State<DialogConfirmReport>
-    with TickerProviderStateMixin {
+class DialogConfirmReportState extends State<DialogConfirmReport> with TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey1 = new GlobalKey<ScaffoldState>();
   BuildContext context1;
 
@@ -46,17 +45,17 @@ class DialogConfirmReportState extends State<DialogConfirmReport>
           return Center(
             child: Container(
               width: 300,
-           //   height: 0.9* DeviceUtil.getDeviceHeight(context),
+              //   height: 0.9* DeviceUtil.getDeviceHeight(context),
               //   color: Colors.white,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                  //  height: 500,
+                    //  height: 500,
                     color: Colors.teal,
                     child: Stack(
-                      overflow: Overflow.visible,
+                      clipBehavior: Clip.none,
                       alignment: Alignment.center,
                       children: <Widget>[
                         Image(
@@ -66,9 +65,9 @@ class DialogConfirmReportState extends State<DialogConfirmReport>
                         ),
                         Positioned(
                           top: -200,
-                          child:  Center(
+                          child: Center(
                             child: Container(
-                               width: 300,
+                              width: 300,
                               alignment: Alignment.topCenter,
                               child: Image(
                                 image: AssetImage(AppImages.ANH_GIF5),
@@ -76,13 +75,17 @@ class DialogConfirmReportState extends State<DialogConfirmReport>
                                 alignment: Alignment.center,
                               ),
                             ),
-                          ),),
-                        Center(// var a=[1,2.3] ;
+                          ),
+                        ),
+                        Center(
+                          // var a=[1,2.3] ;
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                widget.money.toString() == "May mắn" ? widget.money.toString():widget.money.toString()+ " vnđ",
+                                widget.money.toString() == "May mắn"
+                                    ? widget.money.toString()
+                                    : widget.money.toString() + " vnđ",
                                 style: AppTheme.headline,
                               )
                             ],
@@ -91,23 +94,26 @@ class DialogConfirmReportState extends State<DialogConfirmReport>
                       ],
                     ),
                   ),
-                  SizedBox(height: 30,),
+                  SizedBox(
+                    height: 30,
+                  ),
                   FlatButton(
-                    onPressed: (){
+                    onPressed: () {
                       BlocProvider.of<LiXiBloc>(this.context).add(ResetLiXi(true));
                       Navigator.pop(context);
                     },
                     child: Container(
-                      padding: EdgeInsets.only(
-                          top: 15, bottom: 15, left: 30, right: 30),
+                      padding: EdgeInsets.only(top: 15, bottom: 15, left: 30, right: 30),
                       decoration: BoxDecoration(
                         color: AppTheme.nearlyDarkBrown,
                         borderRadius: BorderRadius.all(
                           Radius.circular(30),
                         ),
                       ),
-
-                      child: Text( Language.of(context).getText("li_xi.tiep_tuc"),style: AppTheme.body1,),
+                      child: Text(
+                        Language.of(context).getText("li_xi.tiep_tuc"),
+                        style: AppTheme.body1,
+                      ),
                     ),
                   ),
                 ],

@@ -12,10 +12,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
   LoiChucRepository repository = locator<LoiChucRepository>();
-  await SystemChrome.setPreferredOrientations(<DeviceOrientation>[
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown
-  ]).then(
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent, // transparent status bar
+  ));
+  await SystemChrome.setPreferredOrientations(
+      <DeviceOrientation>[DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then(
     (_) => runApp(
       MultiBlocProvider(
         providers: [

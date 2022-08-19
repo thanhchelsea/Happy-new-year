@@ -22,19 +22,19 @@ String imageBackground = "";
 class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
-    final random = new Random(); //7  9 8
-    int i = random.nextInt(11);
-    if (i != 7 &&
-        i != 8 &&
-        i != 9 &&
-        i != 10 &&
-        i != 2 &&
-        i != 0 &&
-        i != 4 &&
-        i != 6) {
-      imageBackground = "assets/images/anhnen${i}.jpg";
-    } else
-      imageBackground = "assets/images/anhnen3.jpg";
+    // final random = new Random(); //7  9 8
+    // int i = random.nextInt(11);
+    // if (i != 7 &&
+    //     i != 8 &&
+    //     i != 9 &&
+    //     i != 10 &&
+    //     i != 2 &&
+    //     i != 0 &&
+    //     i != 4 &&
+    //     i != 6) {
+    //   imageBackground = "assets/images/anhnen${i}.jpg";
+    // } else
+    imageBackground = "assets/images/anhnen3.jpg";
   }
 
   @override
@@ -132,8 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   AppImages.ICON_THIEP_TET,
                                   "home.tao_thiep",
                                   method: () {
-                                    BlocProvider.of<TaoThiepBloc>(context)
-                                        .add(ChangeText(""));
+                                    BlocProvider.of<TaoThiepBloc>(context).add(ChangeText(""));
                                     Navigator.pushNamed(
                                       context,
                                       Routes.taothiep,
@@ -202,16 +201,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Expanded(
-                                child: ItemAppNgayTet(
-                                    "home.cam_nang_tet", AppImages.ICON_TET,
-                                    () {
+                                child: ItemAppNgayTet("home.cam_nang_tet", AppImages.ICON_TET, () {
                                   Navigator.pushNamed(
                                     context,
                                     Routes.cam_nang,
                                   );
                                 }),
                               ),
-                             // SizedBox(width: 16),
+                              // SizedBox(width: 16),
                               Expanded(
                                 child: ItemAppNgayTet(
                                   "home.li_xi",
@@ -222,7 +219,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                       Routes.lixi,
                                     );
                                   },
-
                                 ),
                               ),
                             ],

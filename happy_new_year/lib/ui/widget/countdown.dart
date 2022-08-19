@@ -15,8 +15,7 @@ class Countdown extends StatefulWidget {
 
 class _CountdownState extends State<Countdown> {
   CountdownTimerController controller;
-  final DateTime lunarNewYear = DateTime(2022, 2, 1);
-
+  final DateTime lunarNewYear = DateTime(2023, 3, 1);
   double width, height;
   @override
   void initState() {
@@ -24,13 +23,12 @@ class _CountdownState extends State<Countdown> {
     super.initState();
     DateTime now = DateTime.now();
     Duration duration = lunarNewYear.difference(now);
-    print(duration.inDays);
-    int endTime =
-        DateTime.now().millisecondsSinceEpoch + duration.inMilliseconds;
+    int endTime = DateTime.now().millisecondsSinceEpoch + duration.inMilliseconds;
     controller = CountdownTimerController(
       endTime: endTime,
     );
   }
+
 //4 8 9 10
   @override
   void dispose() {
@@ -102,24 +100,24 @@ class _CountdownState extends State<Countdown> {
             controller: controller,
             widgetBuilder: (_, CurrentRemainingTime time) {
               if (time == null) {
-                String day="";
-                if( DateTime.now().day == 1) {
+                String day = "";
+                if (DateTime.now().day == 1) {
                   day = "Mùng 1 tết";
                 }
-                if( DateTime.now().day == 2) {
+                if (DateTime.now().day == 2) {
                   day = "Mùng 2 tết";
                 }
-                if( DateTime.now().day == 3) {
+                if (DateTime.now().day == 3) {
                   day = "Mùng 3 tết";
                 }
-                  return Text(
-                   day,// "Chúc Mừng Năm Mới",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w800,
-                      color: AppTheme.red,
-                    ),
-                  );
+                return Text(
+                  day, // "Chúc Mừng Năm Mới",
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w800,
+                    color: AppTheme.red,
+                  ),
+                );
               }
               return Column(
                 children: [
@@ -127,38 +125,22 @@ class _CountdownState extends State<Countdown> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       itemTimer(
-                        time.days != null
-                            ? (time.days < 10
-                                ? '0${time.days}'
-                                : time.days.toString())
-                            : '00',
+                        time.days != null ? (time.days < 10 ? '0${time.days}' : time.days.toString()) : '00',
                         'Ngày',
                         AppImages.ANH_NEN7,
                       ),
                       itemTimer(
-                        time.hours != null
-                            ? (time.hours < 10
-                                ? '0${time.hours}'
-                                : time.hours.toString())
-                            : '00',
+                        time.hours != null ? (time.hours < 10 ? '0${time.hours}' : time.hours.toString()) : '00',
                         'Giờ',
                         AppImages.ANH_NEN8,
                       ),
                       itemTimer(
-                        time.min != null
-                            ? (time.min < 10
-                                ? '0${time.min}'
-                                : time.min.toString())
-                            : '00',
+                        time.min != null ? (time.min < 10 ? '0${time.min}' : time.min.toString()) : '00',
                         'Phút',
                         AppImages.ANH_NEN7,
                       ),
                       itemTimer(
-                        time.sec != null
-                            ? (time.sec < 10
-                                ? '0${time.sec}'
-                                : time.sec.toString())
-                            : '00',
+                        time.sec != null ? (time.sec < 10 ? '0${time.sec}' : time.sec.toString()) : '00',
                         'Giây',
                         AppImages.ANH_NEN8,
                       ),

@@ -25,8 +25,7 @@ class DialogConfirmText extends StatefulWidget {
   DialogConfirmTextState createState() => DialogConfirmTextState();
 }
 
-class DialogConfirmTextState extends State<DialogConfirmText>
-    with TickerProviderStateMixin {
+class DialogConfirmTextState extends State<DialogConfirmText> with TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey1 = new GlobalKey<ScaffoldState>();
   BuildContext context1;
   TextEditingController controller = new TextEditingController();
@@ -52,11 +51,10 @@ class DialogConfirmTextState extends State<DialogConfirmText>
               borderRadius: BorderRadius.circular(14.0),
             ),
             child: Stack(
-              overflow: Overflow.visible,
+              clipBehavior: Clip.none,
               alignment: Alignment.topCenter,
               children: [
-                widget.isShowSaveImage == false ||
-                        widget.isShowSaveImage == null
+                widget.isShowSaveImage == false || widget.isShowSaveImage == null
                     ? Container(
                         height: 0.5 * DeviceUtil.getDeviceHeight(context),
                         child: Padding(
@@ -66,8 +64,7 @@ class DialogConfirmTextState extends State<DialogConfirmText>
                             children: [
                               Container(
                                 alignment: Alignment.center,
-                                height:
-                                    0.4 * DeviceUtil.getDeviceHeight(context),
+                                height: 0.4 * DeviceUtil.getDeviceHeight(context),
                                 decoration: BoxDecoration(
                                   color: Colors.grey.withOpacity(0.3),
                                   borderRadius: BorderRadius.circular(10),
@@ -78,8 +75,7 @@ class DialogConfirmTextState extends State<DialogConfirmText>
                                   maxLines: null,
                                   decoration: InputDecoration(
                                     hintStyle: TextStyle(fontSize: 16),
-                                    hintText: Language.of(context)
-                                        .getText("tao_thiep.nhap_loi_chuc"),
+                                    hintText: Language.of(context).getText("tao_thiep.nhap_loi_chuc"),
                                     border: InputBorder.none,
                                     contentPadding: EdgeInsets.all(20),
                                   ),
@@ -89,12 +85,10 @@ class DialogConfirmTextState extends State<DialogConfirmText>
                               RaisedButton(
                                 onPressed: () {
                                   (widget.isTaoThiepScreen)
-                                      ? BlocProvider.of<TaoThiepBloc>(context)
-                                          .add(
+                                      ? BlocProvider.of<TaoThiepBloc>(context).add(
                                           ChangeText(controller.text),
                                         )
-                                      : BlocProvider.of<LoiChucBloc>(context)
-                                          .add(
+                                      : BlocProvider.of<LoiChucBloc>(context).add(
                                           LoiChucChanged(
                                             changeText: controller.text,
                                             index: widget.index,
@@ -111,15 +105,13 @@ class DialogConfirmTextState extends State<DialogConfirmText>
                                     right: 20,
                                   ),
                                   decoration: BoxDecoration(
-                                    color: AppTheme.nearlyDarkBrown
-                                        .withOpacity(0.7),
+                                    color: AppTheme.nearlyDarkBrown.withOpacity(0.7),
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(30),
                                     ),
                                   ),
                                   child: Text(
-                                    Language.of(context)
-                                        .getText("xac_nhan.xac_nhan"),
+                                    Language.of(context).getText("xac_nhan.xac_nhan"),
                                     style: AppTheme.body1,
                                   ),
                                 ),
@@ -141,8 +133,7 @@ class DialogConfirmTextState extends State<DialogConfirmText>
                     backgroundColor: AppTheme.nearlyYellow,
                     radius: 30,
                     child: Icon(
-                      widget.isShowSaveImage == false ||
-                              widget.isShowSaveImage == null
+                      widget.isShowSaveImage == false || widget.isShowSaveImage == null
                           ? Icons.mode_edit
                           : Icons.save_alt,
                       color: AppTheme.nearlyDarkBrown.withOpacity(0.7),

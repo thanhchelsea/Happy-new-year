@@ -12,13 +12,7 @@ class BaseScreen extends StatelessWidget {
   final Widget body;
   final Widget iconMenu;
   final Function menuMethod;
-  BaseScreen(
-      {this.title,
-      this.iconMoreMenu,
-      this.iconBack,
-      this.body,
-      this.iconMenu,
-      this.menuMethod});
+  BaseScreen({this.title, this.iconMoreMenu, this.iconBack, this.body, this.iconMenu, this.menuMethod});
 
   Widget getAppBarUI(BuildContext context) {
     return Container(
@@ -96,8 +90,7 @@ class BaseScreen extends StatelessWidget {
                                 padding: EdgeInsets.all(2),
                                 decoration: BoxDecoration(
                                   color: AppTheme.nearlyYellow,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20)),
+                                  borderRadius: BorderRadius.all(Radius.circular(20)),
                                 ),
                                 child: iconMenu,
                               ),
